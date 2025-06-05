@@ -1,0 +1,68 @@
+/* FLOWER CARE - Scoped for subpages only */
+.flower-care-section {
+  height: 100vh;
+  padding: 1.5rem 2rem;
+  background-color: #faf6f0;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+
+  /* Hide scrollbar for IE/Edge */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.flower-care-section::-webkit-scrollbar {
+  display: none;
+}
+
+.flower-care-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #eb6a5a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.flower-care-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+
+  /* Hide scrollbar inside content too */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.flower-care-content::-webkit-scrollbar {
+  display: none;
+}
+
+.flower-care-tip {
+  background-color: #fff;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid #7a9e7e;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.flower-care-tip-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.4rem;
+}
+
+.flower-care-tip-desc {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}

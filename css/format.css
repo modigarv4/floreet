@@ -1,0 +1,12 @@
+.format {
+  height: calc(100vh - 1rem);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #96969666;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}

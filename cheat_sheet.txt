@@ -1,0 +1,20 @@
+-> to hide scrollbar
+
+ body{ 
+    overflow-y: scroll; /* Ensure scrolling is allowed */
+    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+To prevent someone from opening login-f.php directly in the browser, add this at the top of all backend
+<?php
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: ../index.php');
+    exit;
+}
+

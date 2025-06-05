@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #faf6f0;
+  color: #333;
+  overflow-y: scroll; /* Ensure scrolling is allowed */
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* remove scrollbar */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* html {
+  background-color: purple;
+}
+body{
+  background-color: teal !important;
+}
+.l-container {
+  background-color: red;
+}
+.r-container {
+  background-color: blue;
+}
+.b-container {
+  background-color: maroon;
+}
+.t-container {
+  background-color: grey;
+}
+header {
+  background-color: brown;
+}
+footer {
+  background-color: crimson;
+}
+.main-container{
+  background-color: black !important;
+} */
+
+.main-container {
+  height: 100vh;
+  width: 100vw; /* full viewport width */
+  padding: 0rem 3rem; /* inner spacing */
+  display: flex;
+  box-sizing: border-box; /* include padding in width */
+}
+
+.l-container {
+  height: 100vh;
+  flex: 0 0 69vw; /* fixed 69vw width but flexible */
+  display: flex;
+  flex-direction: column;
+}
+
+.t-container {
+  height: 67.5vh;
+  width: 100%; /* fill l-container horizontally */
+}
+
+.b-container {
+  flex: 1;
+  width: 100%; /* fill l-container horizontally */
+  display: flex;
+  flex-direction: row;
+  gap: 1rem; /* spacing between children */
+  padding-bottom: 1rem;
+}
+
+.r-container {
+  height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+  box-sizing: border-box;
+  max-width: none;
+}
+
+/* Hero Section */
+.hero {
+  height: 100%;
+  width: 100%; /* full width inside container */
+  box-sizing: border-box;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-content {
+  color: #fff;
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 12px;
+}
+.hero:hover,.s1:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+}
+.hero p {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+.btn.peach {
+  background-color: #eb6a5a;
+  padding: 0.8rem 1.6rem;
+  border-radius: 30px;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.btn.peach:hover {
+  background-color: #ff8a73;
+}
+
+/* Shared Section Styles */
+.s1,.s2 {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.s1-overlay,.s2-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s1-content,.s2-content {
+  color: #fff;
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.s1 h1,.s2 h1 {
+  font-size: 2.5rem;
+}
+
+.s1 p,.s2 p {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}

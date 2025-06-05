@@ -1,0 +1,57 @@
+.premade {
+  height: 100%;
+  width: 35%;
+}
+.idk {
+  height: 100%;
+  width: 20%;
+}
+.featured {
+  height: 100%;
+  width: 45%;
+}
+
+.by-color {
+  height: 20vh;
+  width: 100%;
+}
+.other-products {
+  height: 30vh;
+  width: 100%;    
+}
+
+.other-products,.about-section,.featured,.idk,.premade{
+  margin-top: 1rem;
+}
+
+.about-section {
+  background: url("../assets/backgrounds/vintage-letter.jpg") no-repeat;
+  background-size: cover;
+  background-position: center -300px; /* shifts the image 20px up */
+  box-shadow: none;
+  border: 1px solid #d2b48c;
+  height: 50vh;
+  width: 100%;
+}
+
+.about-overlay {
+  background: rgba(255, 255, 255, 0.65); /* light parchment overlay */
+  backdrop-filter: blur(1px);
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-family: "Georgia", serif;
+}
+
+.about-content {
+  color: #4b3b2a;
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.about-content h2 {
+  font-family: "Cinzel", serif; /* decorative serif font for vintage feel */
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #3e2f1c;
+}
