@@ -1,0 +1,92 @@
+Floreet - Virtual Host Setup Tutorial
+======================================
+
+This tutorial will guide you step-by-step to set up a virtual host for your Floreet project
+so you can access it via http://floreet.local instead of http://localhost/floreet.
+
+--------------------------------------------------
+Step 1: Enable Virtual Hosts in Apache (httpd.conf)
+--------------------------------------------------
+
+1. Open the Apache config file in a text editor:
+   File path: E:\xampp\apache\conf\httpd.conf
+
+2. Find this line:
+   #Include conf/extra/httpd-vhosts.conf
+
+3. Remove the '#' at the beginning to uncomment it:
+   Include conf/extra/httpd-vhosts.conf
+
+4. Save and close the file.
+
+----------------------------------------------------------
+Step 2: Add Your Virtual Host in httpd-vhosts.conf
+----------------------------------------------------------
+
+1. Open the virtual hosts config file:
+   File path: E:\xampp\apache\conf\extra\httpd-vhosts.conf
+
+2. At the bottom of the file, add the following block:
+
+<VirtualHost *:80>
+    ServerAdmin admin@floreet.local
+    DocumentRoot "E:/xampp/htdocs/floreet"
+    ServerName floreet.local
+    ServerAlias www.floreet.local
+    <Directory "E:/xampp/htdocs/floreet">
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ErrorLog "logs/floreet.local-error.log"
+    CustomLog "logs/floreet.local-access.log" common
+</VirtualHost>
+
+3. Save and close the file.
+
+--------------------------------------------------
+Step 3: Edit Your Windows Hosts File
+--------------------------------------------------
+
+1. Open Notepad as Administrator.
+
+2. Open the hosts file from this path:
+   C:\Windows\System32\drivers\etc\hosts
+
+3. Add this line at the bottom:
+
+   127.0.0.1       floreet.local
+
+4. Save and close the file.
+
+--------------------------------------------------
+Step 4: Restart Apache Server
+--------------------------------------------------
+
+1. Open XAMPP Control Panel.
+2. Click "Stop" next to Apache, then click "Start" again.
+
+--------------------------------------------------
+Step 5: Access the Website
+--------------------------------------------------
+
+1. Open your browser.
+2. Go to: http://floreet.local
+3. Your Floreet homepage should now open.
+
+--------------------------------------------------
+Notes
+--------------------------------------------------
+
+- All include/require paths in PHP should use ROOT constant:
+    define('ROOT', __DIR__);
+    require_once ROOT . '/include/head.php';
+
+- Use relative root-based paths for CSS, JS, and images in HTML:
+    /css/style.css
+    /js/script.js
+    /assets/logo.png
+
+--------------------------------------------------
+You're done! Your virtual host is now set up.
+--------------------------------------------------

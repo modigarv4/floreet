@@ -1,8 +1,13 @@
 <?php
-require '../backend/connect.php';
-require '/PHPMailer/src/PHPMailer.php';
-require '/PHPMailer/src/SMTP.php';
-require '/PHPMailer/src/Exception.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
+?> 
+
+
+<?php
+require_once ROOT . '/backend/connect.php';
+require_once ROOT . '/PHPMailer/src/PHPMailer.php';
+require_once ROOT . '/PHPMailer/src/SMTP.php';
+require_once ROOT . '/PHPMailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -72,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
   }
 }
 ?>
-<?php require '/include/head.php'; ?>
+
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
 <style>

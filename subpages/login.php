@@ -125,7 +125,7 @@
 
             <div class="btn secondary">
                 <button type="button" onclick="window.location.href='/subpages/signup.php'" class="button2 signinbtn">Sign Up</button>
-                <button type="button" class="button2 forgotbtn">Forgot Password</button>
+                <button type="button" onclick="window.location.href='/subpages/forgot.php'" class="button2 forgotbtn">Forgot Password</button>
             </div>
         </form>
     </div>

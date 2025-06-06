@@ -1,70 +1,53 @@
 <?php
-require '/backend/connect.php';
-require '/PHPMailer/src/PHPMailer.php';
-require '/PHPMailer/src/SMTP.php';
-require '/PHPMailer/src/Exception.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
+require_once dirname(__DIR__) . '/backend/connect.php';
+require_once dirname(__DIR__) . '/PHPMailer/src/PHPMailer.php';
+require_once dirname(__DIR__) . '/PHPMailer/src/SMTP.php';
+require_once dirname(__DIR__) . '/PHPMailer/src/Exception.php';
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$email = $_SESSION['pending_signup']['email'] ?? '';
-if (!$email) {
-    header("Location: /subpages/verify-otp.php?error=" . urlencode("Session expired. Please sign up again."));
+// 🧠 Determine context and get email
+if (isset($_SESSION['pending_signup']['email'])) {
+    $email = $_SESSION['pending_signup']['email'];
+    $redirect_page = '/subpages/verify-otp.php';
+} elseif (isset($_SESSION['reset_email'])) {
+    $email = $_SESSION['reset_email'];
+    $redirect_page = '/subpages/forgot.php';
+} else {
+    header("Location: /login.php?error=" . urlencode("Session expired or invalid access."));
     exit;
 }
 
-
-// Limit resend attempts to 3 within session
-$email = $_SESSION['pending_signup']['email'] ?? '';
-
-if (!$email) {
-    header("Location: /subpages/verify-otp.php?error=" . urlencode("Session expired. Please sign up again."));
-    exit;
-}
-
-// Track resend attempts per email
+// ✅ Track resend attempts using session
 if (!isset($_SESSION['resend_attempts'])) {
     $_SESSION['resend_attempts'] = [];
 }
-
 $_SESSION['resend_attempts'][$email] = ($_SESSION['resend_attempts'][$email] ?? 0) + 1;
 
 if ($_SESSION['resend_attempts'][$email] > 3) {
-    header("Location: /subpages/verify-otp.php?error=" . urlencode("Too many attempts. Try again after 10 minutes."));
-    exit;
-}
- 
-
-// Generate OTP and expiry
-$otp = strval(rand(100000, 999999));
-$expires_at = (new DateTime())->modify('+5 minutes')->format('Y-m-d H:i:s');
-
-
-if (count($resendAttempts) >= 3) {
-    header("Location: /subpages/verify-otp.php?error=" . urlencode("Too many OTP requests. Try again after 10 minutes."));
+    header("Location: {$redirect_page}?error=" . urlencode("Too many OTP requests. Try again after 10 minutes."));
     exit;
 }
 
-// ✅ Add current time to attempts
-$resendAttempts[] = $currentTime;
-$_SESSION['resend_attempts'] = $resendAttempts;
-$_SESSION['last_otp_sent_at'] = $currentTime;
-
-// ✅ Generate OTP (valid for 5 minutes)
+// ✅ Generate OTP and store expiry
 $otp = strval(rand(100000, 999999));
 $expires_at = (new DateTime())->modify('+5 minutes')->format('Y-m-d H:i:s');
 $last_sent_at = (new DateTime())->format('Y-m-d H:i:s');
 
-// ✅ Store OTP in database (overwrite previous for that email)
+// ✅ Save OTP in DB
 $stmt = $conn->prepare("REPLACE INTO otp_verifications (email, otp, expires_at, last_sent_at) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $email, $otp, $expires_at, $last_sent_at);
 $stmt->execute();
 
 // ✅ Load SMTP config
-$smtp = require __DIR__ . '/config/smtp-config.php';
+$smtp = require_once ROOT . '/config/smtp-config.php';
 
 $mail = new PHPMailer(true);
+
+
 try {
     $mail->isSMTP();
     $mail->Host = $smtp['host'];
@@ -76,13 +59,18 @@ try {
 
     $mail->setFrom($smtp['from_email'], $smtp['from_name']);
     $mail->addAddress($email);
+
+    $mail->isHTML(true);
     $mail->Subject = 'Your OTP Code';
-    $mail->Body = "Your OTP is: $otp\nIt will expire in 5 minutes.";
+    $mail->Body = "Your OTP is: <strong>$otp</strong><br>It will expire in 5 minutes.";
 
     $mail->send();
-    header("Location: /subpages/verify-otp.php?message=" . urlencode("OTP sent successfully.") . "&resend_started=1");
+
+    $_SESSION['last_otp_sent_at'] = $last_sent_at;
+
+    header("Location: {$redirect_page}?message=" . urlencode("OTP sent successfully.") . "&resend_started=1");
     exit;
 } catch (Exception $e) {
-    header("Location: /subpages/verify-otp.php?error=" . urlencode("Failed to send OTP. " . $mail->ErrorInfo));
+    header("Location: {$redirect_page}?error=" . urlencode("Failed to send OTP. " . $mail->ErrorInfo));
     exit;
 }

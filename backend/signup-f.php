@@ -1,13 +1,18 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
+?> 
+
+
+<?php
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-  header("Location: ../subpages/signup.php");
+  header("Location: /subpages/signup.php");
   exit;
 }
 
-require '/PHPMailer/src/PHPMailer.php';
-require '/PHPMailer/src/SMTP.php';
-require '/PHPMailer/src/Exception.php';
-require_once '/backend/connect.php';
+require_once ROOT . '/PHPMailer/src/PHPMailer.php';
+require_once ROOT . '/PHPMailer/src/SMTP.php';
+require_once ROOT . '/PHPMailer/src/Exception.php';
+require_once ROOT . '/backend/connect.php';
 session_start();
 
 $first_name = trim($_POST["first_name"]);

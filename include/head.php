@@ -15,7 +15,6 @@ require_once __DIR__ . '/../config.php'; // Pull in ROOT from project root
 <link rel="stylesheet" href="/css/login-signup.css" />
 <link rel="stylesheet" href="/css/custom.css" />
 <link rel="stylesheet" href="/css/mini-pages.css" />
-<link rel="stylesheet" href="/css/format.css" />
 <link rel="stylesheet" href="/css/components.css" />
 
 

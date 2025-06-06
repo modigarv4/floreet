@@ -42,7 +42,7 @@ $firstName = isset($_SESSION['first_name']) ? $_SESSION['first_name'] : 'Guest';
       </div>
       <div class="divider"></div>
       <div class="location" title="Filter by Location">
-        <img src="/assets/images/question_location.svg" alt="Location" height="24" width="24" onerror="this.onerror=null; this.src='../assets/images/question_location.svg';" >
+        <img src="/assets/images/question_location.svg" alt="Location" height="24" width="24" onerror="this.onerror=null; this.src='../assets/images/question_location.svg';">
       </div>
     </div>
 
@@ -51,7 +51,18 @@ $firstName = isset($_SESSION['first_name']) ? $_SESSION['first_name'] : 'Guest';
       <button type="submit">🔍</button>
     </form>
 
+
     <section class="menu-bar">
+
+      <div class="greeting-label">
+        Hi, <?= htmlspecialchars($firstName) ?>
+      </div>
+      <div class="divider"></div>
+      <div class="dropdown-wrapper" style="position: relative;">
+        <button onclick="window.location.href='/index.php'" class="btn primary">
+          <i class="bi bi-house" style="font-size: 1.2rem;"></i>
+        </button>
+      </div>
       <!-- Cart Dropdown -->
       <div class="dropdown-wrapper" style="position: relative;">
         <button onclick="toggleDropdown('cart')" class="btn primary">
@@ -86,24 +97,19 @@ $firstName = isset($_SESSION['first_name']) ? $_SESSION['first_name'] : 'Guest';
         </div>
       </div>
 
-
-
       <!-- Menu Dropdown -->
       <div class="dropdown-wrapper" style="position: relative;">
         <button onclick="toggleDropdown('menu')" class="btn primary">
           <i class="bi bi-list" style="font-size: 1.2rem;"></i>
         </button>
         <div class="custom-dropdown" id="dropdownMenu">
-          <a href="/index.php">Home</a>
           <a href="#">Shop by Color</a>
-          <a href="#">Contact</a>
+          <a href="/include/contact.php">Contact</a>
         </div>
       </div>
-     
+
     </section>
-     <div class="greeting-label">
-        Hi, <?= htmlspecialchars($firstName) ?>
-      </div>
+
   </nav>
 </header>
 
@@ -239,9 +245,17 @@ $firstName = isset($_SESSION['first_name']) ? $_SESSION['first_name'] : 'Guest';
 
   .greeting-label {
     margin-top: 0.3rem;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     color: white;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Great Vibes', cursive;
     font-weight: 500;
+    padding-right: 0.5rem;
+  }
+
+  .menu-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
   }
 </style>
