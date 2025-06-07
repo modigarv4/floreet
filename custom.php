@@ -2,111 +2,145 @@
 <html lang="en">
 
 <head>
-  <?php
+    <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
-    ?>  
+    ?>
     <title>Floreet-custom bouquet</title>
 </head>
 
 <body>
-   <?php require_once ROOT . '/include/header.php';?>
+    <?php require_once ROOT . '/include/header.php'; ?>
     <div class="main-container">
         <section class="custom">
             <section class="t-custom">
                 <section class="t-l">
                     <input type="text" autocomplete="off" name="text" class="input" placeholder="Search by colour/name">
-                
+
                 </section>
+                
                 <section class="t-r">
-                    <div class="card">
-                        <div class="tools">
-                            <div class="circle">
-                                <span class="red box"></span>
+                    <div class="dividerb"></div>
+                    <div class="card-scroll-container">
+                        <div class="card">
+                            <div class="tools">
+                                <div class="circle">
+                                    <span class="red box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="yellow box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="green box"></span>
+                                </div>
                             </div>
-                            <div class="circle">
-                                <span class="yellow box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="green box"></span>
-                            </div>
-                        </div>
-                        <div class="card__content">
-                        </div>
-                    </div>
-                     <div class="card">
-                        <div class="tools">
-                            <div class="circle">
-                                <span class="red box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="yellow box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="green box"></span>
+                            <div class="card__content">
                             </div>
                         </div>
-                        <div class="card__content">
-                        </div>
-                    </div>
-                    
-                     <div class="card">
-                        <div class="tools">
-                            <div class="circle">
-                                <span class="red box"></span>
+                        <div class="card">
+                            <div class="tools">
+                                <div class="circle">
+                                    <span class="red box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="yellow box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="green box"></span>
+                                </div>
                             </div>
-                            <div class="circle">
-                                <span class="yellow box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="green box"></span>
-                            </div>
-                        </div>
-                        <div class="card__content">
-                        </div>
-                    </div>
-                     <div class="card">
-                        <div class="tools">
-                            <div class="circle">
-                                <span class="red box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="yellow box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="green box"></span>
+                            <div class="card__content">
                             </div>
                         </div>
-                        <div class="card__content">
-                        </div>
-                    </div>
-                     <div class="card">
-                        <div class="tools">
-                            <div class="circle">
-                                <span class="red box"></span>
+
+                        <div class="card">
+                            <div class="tools">
+                                <div class="circle">
+                                    <span class="red box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="yellow box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="green box"></span>
+                                </div>
                             </div>
-                            <div class="circle">
-                                <span class="yellow box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="green box"></span>
-                            </div>
-                        </div>
-                        <div class="card__content">
-                        </div>
-                    </div>
-                     <div class="card">
-                        <div class="tools">
-                            <div class="circle">
-                                <span class="red box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="yellow box"></span>
-                            </div>
-                            <div class="circle">
-                                <span class="green box"></span>
+                            <div class="card__content">
                             </div>
                         </div>
-                        <div class="card__content">
+                        <div class="card">
+                            <div class="tools">
+                                <div class="circle">
+                                    <span class="red box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="yellow box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="green box"></span>
+                                </div>
+                            </div>
+                            <div class="card__content">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="tools">
+                                <div class="circle">
+                                    <span class="red box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="yellow box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="green box"></span>
+                                </div>
+                            </div>
+                            <div class="card__content">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="tools">
+                                <div class="circle">
+                                    <span class="red box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="yellow box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="green box"></span>
+                                </div>
+                            </div>
+                            <div class="card__content">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="tools">
+                                <div class="circle">
+                                    <span class="red box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="yellow box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="green box"></span>
+                                </div>
+                            </div>
+                            <div class="card__content">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="tools">
+                                <div class="circle">
+                                    <span class="red box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="yellow box"></span>
+                                </div>
+                                <div class="circle">
+                                    <span class="green box"></span>
+                                </div>
+                            </div>
+                            <div class="card__content">
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -142,7 +176,7 @@
         </section>
     </div>
 
-   <?php require_once ROOT . '/include/footer.php';?>
+    <?php require_once ROOT . '/include/footer.php'; ?>
 
 </body>
 
