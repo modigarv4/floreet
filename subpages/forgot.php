@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/backend/connect.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/backend/send-otp.php'; // optional helper for generateOTP()
 
 $email = '';
 $step = 'email'; // Default step
@@ -17,18 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->store_result();
 
         if ($stmt->num_rows === 1) {
-            $otp = rand(100000, 999999);
             $_SESSION['reset_email'] = $email;
-            $_SESSION['reset_otp'] = $otp;
-
-            // Send email
-            sendOTPEmail($email, $otp); // You'll need to define this function with PHPMailer
-            $step = 'otp';
-            $showOtpField = true;
+            header("Location: /subpages/send-otp.php?from=forgot");
+            exit;
         } else {
             $message = "No account found with that email.";
         }
-
     } elseif (isset($_POST['verify_otp'])) {
         $userOtp = trim($_POST['otp']);
         if ($userOtp == $_SESSION['reset_otp']) {
@@ -39,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $showOtpField = true;
             $message = "Incorrect OTP. Try again.";
         }
-
     } elseif (isset($_POST['change_email'])) {
         session_unset();
         session_destroy();
@@ -51,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Floreet - Forgot Password</title>
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php'; ?>
@@ -68,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <form method="POST" class="form">
@@ -99,4 +93,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </body>
+
 </html>

@@ -5,6 +5,7 @@
 }
 body {
   font-family: "Inter", sans-serif;
+  margin: 0;
   background-color: #faf6f0;
   color: #333;
   overflow-y: scroll; /* Ensure scrolling is allowed */
@@ -144,7 +145,7 @@ footer {
 }
 
 /* Shared Section Styles */
-.s1,.s2 {
+.s1 {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
@@ -152,7 +153,7 @@ footer {
   box-sizing: border-box;
 }
 
-.s1-overlay,.s2-overlay {
+.s1-overlay {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
@@ -161,7 +162,7 @@ footer {
   justify-content: center;
 }
 
-.s1-content,.s2-content {
+.s1-content {
   color: #fff;
   text-align: center;
   max-width: 600px;
@@ -169,11 +170,11 @@ footer {
   border-radius: 12px;
 }
 
-.s1 h1,.s2 h1 {
+.s1 h1 {
   font-size: 2.5rem;
 }
 
-.s1 p,.s2 p {
+.s1 p {
   margin: 1rem 0;
   font-size: 1.1rem;
 }

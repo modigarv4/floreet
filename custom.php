@@ -148,9 +148,9 @@
             </section>
 
             <section class="b-custom">
-                <section class="s2 bucket">
-                    <div class="s2-overlay">
-                        <div class="s2-content">
+                <section class="s1 bucket">
+                    <div class="s1-overlay">
+                        <div class="s1-content">
                             <p>bucket. </p>
                             <p>to do, scrolling flex cards, + icon at bottom centre of flex card, working sections bucket,vendor,...., create data for vendors and stuff,
                                 the scroll for diff wrap materials.
@@ -158,16 +158,16 @@
                         </div>
                     </div>
                 </section>
-                <section class="s2 vendor">
-                    <div class="s2-overlay">
-                        <div class="s2-content">
+                <section class="s1 vendor">
+                    <div class="s1-overlay">
+                        <div class="s1-content">
                             <p>vendor.</p>
                         </div>
                     </div>
                 </section>
-                <section class="s2 billing">
-                    <div class="s2-overlay">
-                        <div class="s2-content">
+                <section class="s1 billing">
+                    <div class="s1-overlay">
+                        <div class="s1-content">
                             <p>billing</p>
                         </div>
                     </div>

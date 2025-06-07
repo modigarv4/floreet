@@ -10,16 +10,20 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // 🧠 Determine context and get email
+$redirect_page = '/subpages/login.php'; // fallback
 if (isset($_SESSION['pending_signup']['email'])) {
     $email = $_SESSION['pending_signup']['email'];
     $redirect_page = '/subpages/verify-otp.php';
 } elseif (isset($_SESSION['reset_email'])) {
     $email = $_SESSION['reset_email'];
-    $redirect_page = '/subpages/forgot.php';
+    $redirect_page = '/subpages/forgot.php'; // Correct for forgot
 } else {
-    header("Location: /login.php?error=" . urlencode("Session expired or invalid access."));
+    $from = $_SERVER['HTTP_REFERER'] ?? $redirect_page;
+    header("Location: {$from}?error=" . urlencode("Session expired. Please enter your email again."));
     exit;
 }
+
+
 
 // ✅ Track resend attempts using session
 if (!isset($_SESSION['resend_attempts'])) {
@@ -37,6 +41,7 @@ $otp = strval(rand(100000, 999999));
 $expires_at = (new DateTime())->modify('+5 minutes')->format('Y-m-d H:i:s');
 $last_sent_at = (new DateTime())->format('Y-m-d H:i:s');
 
+
 // ✅ Save OTP in DB
 $stmt = $conn->prepare("REPLACE INTO otp_verifications (email, otp, expires_at, last_sent_at) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $email, $otp, $expires_at, $last_sent_at);
@@ -48,6 +53,7 @@ $smtp = require_once ROOT . '/config/smtp-config.php';
 $mail = new PHPMailer(true);
 
 
+
 try {
     $mail->isSMTP();
     $mail->Host = $smtp['host'];
@@ -57,12 +63,29 @@ try {
     $mail->SMTPSecure = 'tls';
     $mail->Port = $smtp['port'];
 
-    $mail->setFrom($smtp['from_email'], $smtp['from_name']);
+    $mail->setFrom($smtp['from_email'], $smtp['from_name'] ?? 'Floreet Support'); // ✅
     $mail->addAddress($email);
 
+
     $mail->isHTML(true);
-    $mail->Subject = 'Your OTP Code';
-    $mail->Body = "Your OTP is: <strong>$otp</strong><br>It will expire in 5 minutes.";
+    if (isset($_SESSION['reset_email'])) {
+        $_SESSION['reset_otp'] = $otp;
+        $mail->Subject = 'Your Password Reset OTP';
+        $mail->Body = "
+        You requested to reset your password.<br>
+        Your OTP is: <strong>$otp</strong><br>
+        This code will expire in 5 minutes.<br><br>
+        If you didn’t request this, please ignore this email.
+    ";
+    } else {
+        $mail->Subject = 'Your OTP Code';
+        $mail->Body = "
+        Welcome to Floreet!<br>
+        Your OTP is: <strong>$otp</strong><br>
+        This code will expire in 5 minutes.<br><br>
+        If you didn’t initiate this request, you can safely ignore this message.
+    ";
+    }
 
     $mail->send();
 

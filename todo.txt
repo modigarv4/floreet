@@ -5,6 +5,8 @@
 > forgot pwd logic and working, 
 > frontend of index page
 
+delete OTP after use - refer this chat and add that functionality
+
 > pages
     cart
     order

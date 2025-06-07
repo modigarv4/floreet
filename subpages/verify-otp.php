@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
-?> 
+?>
 
 
 <?php
@@ -31,8 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
     if (!$data) {
       $error = "No OTP found. Please resend.";
     } else {
-      $currentTime = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
-      $expiryTime = new DateTime($data['expires_at'], new DateTimeZone('Asia/Kolkata'));
+      $currentTime = new DateTimeImmutable('now', new DateTimeZone('UTC'));
+      $expiresAt = (new DateTimeImmutable('now', new DateTimeZone('UTC')))
+        ->modify('+10 minutes')
+        ->format('Y-m-d H:i:s');
+
+
 
       if ($currentTime > $expiryTime) {
         $error = "OTP expired. Please resend.";
@@ -141,7 +145,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
         <div>
           <form method="POST">
             <div class="field" style="position: relative;">
-              <input name="otp" placeholder="6-digit OTP" class="input-field" type="text" autocomplete="one-time-code">
+              <input
+                name="otp"
+                placeholder="6-digit OTP"
+                class="input-field"
+                type="text"
+                inputmode="numeric"
+                pattern="\d{6}"
+                maxlength="6"
+                autocomplete="one-time-code"
+                oninput="this.value = this.value.replace(/\D/g, '').slice(0, 6);" />
             </div>
             <?php if (!empty($error)): ?>
               <div class="error-bubble"><?= htmlspecialchars($error) ?></div>
@@ -197,6 +210,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
         setTimeout(() => bubble.remove(), 500);
       }
     }, 4000);
+
+    document.querySelector('input[name="otp"]').addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pasted = (e.clipboardData || window.clipboardData).getData('text');
+      const digits = pasted.replace(/\D/g, '').slice(0, 6);
+      this.value = digits;
+    });
   </script>
 </body>
 
