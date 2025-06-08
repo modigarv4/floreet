@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 session_start();
-require_once '/backend/connect.php'; // Adjust path if needed
+require_once $_SERVER['DOCUMENT_ROOT'] . '/backend/connect.php'; // Adjust path if needed
 
 
 

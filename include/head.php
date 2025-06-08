@@ -4,7 +4,6 @@ require_once __DIR__ . '/../config.php'; // Pull in ROOT from project root
 
 
 
-
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/png" href="/assets/logo/sakura.png" />
@@ -19,7 +18,7 @@ require_once __DIR__ . '/../config.php'; // Pull in ROOT from project root
 
 
 
-<script src="/js/loading-dots.js" defer></script>
+
 
 
 <!-- fonts -->

@@ -5,7 +5,13 @@
 > forgot pwd logic and working, 
 > frontend of index page
 
-delete OTP after use - refer this chat and add that functionality
+breakdown the all the codes and put out the common reusable components
+
+in signup page, a field was missing and i clicked singup and it refreshed the page, instead i want it to show an error bubble for the missing field
+
+ob_start() 
+ob_end_flush - understand what it is
+
 
 > pages
     cart
