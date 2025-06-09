@@ -73,7 +73,7 @@ footer {
 }
 
 .b-container {
-  flex: 1;
+  height: 32.5vh;
   width: 100%; /* fill l-container horizontally */
   display: flex;
   flex-direction: row;
@@ -120,7 +120,8 @@ footer {
   padding: 2rem;
   border-radius: 12px;
 }
-.hero:hover,.s1:hover {
+.hero:hover,
+.s1:hover {
   transform: scale(1.02);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
@@ -165,8 +166,7 @@ footer {
 .s1-content {
   color: #fff;
   text-align: center;
-  max-width: 600px;
-  padding: 2rem;
+  width: 100%;
   border-radius: 12px;
 }
 

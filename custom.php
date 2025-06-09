@@ -17,7 +17,7 @@
                     <input type="text" autocomplete="off" name="text" class="input" placeholder="Search by colour/name">
 
                 </section>
-                
+
                 <section class="t-r">
                     <div class="dividerb"></div>
                     <div class="card-scroll-container">
@@ -159,9 +159,30 @@
                     </div>
                 </section>
                 <section class="s1 vendor">
-                    <div class="s1-overlay">
-                        <div class="s1-content">
-                            <p>vendor.</p>
+                    <div class="s1-overlay vendor-overlay" >
+                        <div class="s1-content vendor-content">
+                            <div class="s1 vlist">
+                                <div class="s1-overlay vlist-overlay">
+                                    <div class="s1-content vlist-content">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="s1 vlist">
+                                <div class="s1-overlay vlist-overlay">
+                                    <div class="s1-content vlist-content">
+                                    </div>
+                                </div>
+                            </div> <div class="s1 vlist">
+                                <div class="s1-overlay vlist-overlay">
+                                    <div class="s1-content vlist-content">
+                                    </div>
+                                </div>
+                            </div> <div class="s1 vlist">
+                                <div class="s1-overlay vlist-overlay">
+                                    <div class="s1-content vlist-content">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
