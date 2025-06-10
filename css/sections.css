@@ -17,15 +17,19 @@
 }
 .other-products {
   height: 30vh;
-  width: 100%;    
+  width: 100%;
 }
 
-.other-products,.about-section,.featured,.idk,.premade{
+.other-products,
+.about-section,
+.featured,
+.idk,
+.premade {
   margin-top: 1rem;
 }
 
 .about-section {
-  background: url("../assets/backgrounds/vintage-letter.jpg") no-repeat;
+  background: url("/assets/backgrounds/vintage-letter.jpg") no-repeat;
   background-size: cover;
   background-position: center -300px; /* shifts the image 20px up */
   box-shadow: none;
@@ -35,6 +39,8 @@
 }
 
 .about-overlay {
+  height: 100%;
+  width: 100%;
   background: rgba(255, 255, 255, 0.65); /* light parchment overlay */
   backdrop-filter: blur(1px);
   justify-content: flex-start;
@@ -43,15 +49,38 @@
 }
 
 .about-content {
+  height: 100%;
+  width: 100%;
   color: #4b3b2a;
   text-align: left;
   font-size: 1.1rem;
   line-height: 1.8;
+  padding: 2rem 3rem; /* ADDED: top-bottom and left-right padding */
+  box-sizing: border-box; /* ensures padding doesn't overflow */
 }
 
 .about-content h2 {
   font-family: "Cinzel", serif; /* decorative serif font for vintage feel */
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
   color: #3e2f1c;
+}
+
+.about-content a.btn {
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+}
+
+
+
+@media (max-width: 768px) {
+  .about-content {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .about-content h2 {
+    font-size: 1.5rem;
+  }
 }

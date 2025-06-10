@@ -23,3 +23,4 @@ require_once __DIR__ . '/../config.php'; // Pull in ROOT from project root
 
 <!-- fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Georgia&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">

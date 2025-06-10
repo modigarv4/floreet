@@ -4,7 +4,7 @@
 <head>
     <?php
     require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
-    ?>  
+    ?>
     <title>Floreet</title>
 </head>
 
@@ -67,8 +67,12 @@
             <section class="s1 about-section">
                 <div class="s1-overlay about-overlay">
                     <div class="s1-content about-content">
-                        <h2>Why Us?</h2>
-                        <p>At Floreet, we help you send love and joy through personalized floral arrangements. Whether it's a celebration or a gesture of care, our bouquet builder puts creativity in your hands.</p>
+                        <h2>Our Story, Rooted in Love 🌷</h2>
+                        <p>
+                            At Floreet, every bloom tells a story. We create thoughtfully designed floral pieces that help you express what words often can’t.
+                        </p>
+                        <p style="font-family: 'Dancing Script', cursive; font-size: 1.2rem;">— The Floreet Team</p>
+                         <a href="/subpages/contact.php" class="why-link">Why Floreet →</a>
                     </div>
                 </div>
             </section>

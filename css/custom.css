@@ -128,3 +128,20 @@
   -ms-overflow-style: none; /* IE 10+ */
 }
 
+.why-link {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #5e4934;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.why-link:hover {
+  opacity: 1;
+  color: #3e2f1c;
+  text-decoration: underline;
+}
