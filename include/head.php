@@ -18,7 +18,8 @@ require_once __DIR__ . '/../config.php'; // Pull in ROOT from project root
 
 
 
-
+<script src="/js/login-signup.js" defer></script>
+<script src="/js/loading-dots.js" defer></script>
 
 
 <!-- fonts -->
