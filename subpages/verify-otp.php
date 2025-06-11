@@ -217,6 +217,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
       const digits = pasted.replace(/\D/g, '').slice(0, 6);
       this.value = digits;
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const otpInput = document.querySelector('input[name="otp"]');
+      if (otpInput) otpInput.focus();
+    });
   </script>
 </body>
 
