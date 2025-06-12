@@ -1,4 +1,3 @@
-
 .login-container {
   height: 100vh;
   width: 100vw;
@@ -18,6 +17,11 @@
   gap: 1rem;
 }
 
+.form:hover {
+  transform: scale(1.03);
+  transition: 0.3s ease-in-out;
+}
+
 .otpf {
   display: flex;
   flex-direction: column;
@@ -35,20 +39,16 @@
   align-items: center;
   margin-bottom: 0.5rem;
 }
+
 .back-arrow {
+  position: absolute;
+  top: 10px;
+  left: 15px;
   font-size: 24px;
+  cursor: pointer;
   color: white;
   font-weight: bold;
-  cursor: pointer;
-}
-
-.btn.verify {
-  margin-bottom: 1.2rem;
-}
-
-.form:hover {
-  transform: scale(1.03);
-  transition: 0.3s ease-in-out;
+  text-decoration: none;
 }
 
 .close-btn {
@@ -59,13 +59,9 @@
   text-decoration: none;
   color: white;
 }
-.back-arrow {
-  position: absolute;
-  top: 10px;
-  left: 15px;
-  font-size: 24px;
-  text-decoration: none;
-  color: white;
+
+.btn.verify {
+  margin-bottom: 1.2rem;
 }
 
 #heading {
@@ -94,9 +90,18 @@
   justify-content: center;
   cursor: pointer;
   position: absolute;
+  margin-left: auto;
+  font-size: 1rem;
   right: 0.8rem;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.signinbtn {
+  margin-right: 0.25rem;
+}
+.forgotbtn {
+  margin-left: 0.25rem;
 }
 
 .input-icon {
@@ -117,21 +122,7 @@
   opacity: 0.5;
 }
 
-.toggle-eye {
-  cursor: pointer;
-  margin-left: auto;
-  font-size: 1rem;
-}
-
-.signinbtn {
-  margin-right: 0.25rem;
-}
-.forgotbtn {
-  margin-left: 0.25rem;
-}
-
-.btn,
-.resend-btn {
+.btn {
   display: flex;
   justify-content: center;
 }
@@ -140,9 +131,15 @@
   justify-content: space-between;
 }
 
+.button1 {
+  height: 2.5rem;
+}
+
 .button1,
 .button2,
 .resend-btn {
+  display: flex;
+  justify-content: center;
   flex: 1;
   padding: 0.75rem;
   background-color: #333;
@@ -156,4 +153,49 @@
 .button2:hover,
 .resend-btn:hover {
   background-color: black;
+}
+
+/* SIGNUP */
+.error-bubble,
+.password-checklist {
+  position: absolute;
+  left: 105%;
+  background-color: #7a9e7e;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  width: 17rem;
+  line-height: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+.password-checklist {
+  top: 52%;
+}
+
+.error-bubble.email-error {
+  top: 32%;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+.field.error input {
+  border: 2px solid red;
+}
+
+.asterisk {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: red;
+  font-weight: bold;
+  font-size: 1.2rem;
+  opacity: 0.5;
+  display: none;
 }

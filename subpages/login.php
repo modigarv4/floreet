@@ -11,64 +11,6 @@
 
 </head>
 
-<script>
-    const loginForm = document.querySelector(".form");
-    const loginBtn = document.getElementById("loginBtn");
-    const loginText = document.getElementById("loginText");
-    const loginLoader = document.getElementById("loginLoader");
-
-    loginForm.addEventListener("submit", () => {
-        loginBtn.disabled = true;
-        loginText.style.display = "none";
-        loginLoader.style.display = "flex";
-    });
-
-    function togglePassword() {
-        const pwd = document.getElementById("password");
-        const icon = document.getElementById("eyeIcon");
-        if (pwd.type === "password") {
-            pwd.type = "text";
-            icon.style.fillOpacity = "0.4"; // slightly faded when visible
-        } else {
-            pwd.type = "password";
-            icon.style.fillOpacity = "1"; // normal opacity
-        }
-    }
-
-    function validateForm() {
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-
-        if (!emailPattern.test(email)) {
-            alert("Please enter a valid email address.");
-            return false;
-        }
-
-        if (!password) {
-            alert("Please enter your password.");
-            return false;
-        }
-
-        return true;
-    }
-
-    document.getElementById('email').addEventListener('input', function(e) {
-        // Allowed characters in email local part and domain: letters, digits, ., _, %, +, -, @
-        // We disallow everything else, including & and uppercase letters (convert to lowercase)
-
-        // Convert input to lowercase
-        let value = e.target.value.toLowerCase();
-
-        // Remove any character that is not a-z, 0-9, ., _, %, +, -, @
-        value = value.replace(/[^a-z0-9._%+\-@]/g, '');
-
-        // Set the cleaned value back to input
-        e.target.value = value;
-    });
-</script>
-
 <body>
     <div class="login-container">
         <form class="form" method="POST" action="/backend/login-f.php" autocomplete="on" onsubmit="return validateForm()">
