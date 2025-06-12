@@ -84,55 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
-<style>
-  .error-bubble {
-    position: absolute;
-    left: 105%;
-    top: 27%;
-    background-color: #7A9E7E;
-    color: #fff;
-    border-radius: 10px;
-    padding: 1rem;
-    font-size: 0.9rem;
-    width: 17rem;
-    line-height: 1.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    z-index: 100;
-  }
 
-  .message-box {
-    position: absolute;
-    left: 105%;
-    top: 27%;
-    background-color: #4CAF50;
-    color: #fff;
-    border-radius: 10px;
-    padding: 1rem;
-    font-size: 0.9rem;
-    width: 17rem;
-    line-height: 1.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  }
-
-  .btn.verify {
-    margin-bottom: 1rem;
-  }
-
-  .back-arrow {
-    position: absolute;
-    top: 10px;
-    left: 15px;
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
-    font-weight: bold;
-  }
-
-  .login-container {
-    display: flex;
-    flex-direction: column;
-  }
-</style>
 
 <body>
   <div class="login-container">
@@ -157,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
                 oninput="this.value = this.value.replace(/\D/g, '').slice(0, 6);" />
             </div>
             <?php if (!empty($error)): ?>
-              <div class="error-bubble"><?= htmlspecialchars($error) ?></div>
+              <div class="error-bubble verify"><?= htmlspecialchars($error) ?></div>
             <?php elseif (!empty($message)): ?>
               <div class="message-box"><?= htmlspecialchars($message) ?></div>
             <?php endif; ?>
@@ -178,51 +130,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
     </div>
   </div>
 
-
-  <script>
-    // TIMER CONTROL
-    const urlParams = new URLSearchParams(window.location.search);
-    const shouldStartTimer = urlParams.has('resend_started');
-
-    if (shouldStartTimer) {
-      const btn = document.getElementById("resendbtn");
-      let countdown = 120;
-      btn.disabled = true;
-
-      const interval = setInterval(() => {
-        if (countdown > 0) {
-          btn.innerText = `Wait (${countdown}s)`;
-          countdown--;
-        } else {
-          btn.disabled = false;
-          btn.innerText = "Resend OTP";
-          clearInterval(interval);
-        }
-      }, 1000);
-    }
-
-    // AUTO-HIDE MESSAGE BUBBLE
-    setTimeout(() => {
-      const bubble = document.querySelector('.error-bubble');
-      if (bubble) {
-        bubble.style.transition = 'opacity 0.5s ease';
-        bubble.style.opacity = '0';
-        setTimeout(() => bubble.remove(), 500);
-      }
-    }, 4000);
-
-    document.querySelector('input[name="otp"]').addEventListener('paste', function(e) {
-      e.preventDefault();
-      const pasted = (e.clipboardData || window.clipboardData).getData('text');
-      const digits = pasted.replace(/\D/g, '').slice(0, 6);
-      this.value = digits;
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const otpInput = document.querySelector('input[name="otp"]');
-      if (otpInput) otpInput.focus();
-    });
-  </script>
 </body>
 
 </html>

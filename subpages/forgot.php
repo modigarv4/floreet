@@ -48,15 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Floreet - Forgot Password</title>
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php'; ?>
     <style>
-        .error-bubble {
-            position: absolute;
-            left: 105%;
-            top: 40%;
-            background-color: #7A9E7E;
-            color: white;
-            padding: 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
+        .error-bubble.forgot {
             display: <?= empty($message) ? 'none' : 'block' ?>;
         }
     </style>
@@ -79,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <?php if (!empty($message)): ?>
-                <div class="error-bubble"><?= htmlspecialchars($message) ?></div>
+                <div class="error-bubble forgot"><?= htmlspecialchars($message) ?></div>
             <?php endif; ?>
 
             <div class="btn">

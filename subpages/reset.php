@@ -38,65 +38,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Reset Password</title>
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php'; ?>
-    <style>
-        .error-bubble {
-            position: absolute;
-            left: 105%;
-            background-color: #7A9E7E;
-            color: white;
-            padding: 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            top: 40%;
-        }
 
-        .success-bubble {
-            background-color: #7A9E7E;
-            padding: 1rem;
-            color: white;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-    </style>
     <script>
-        function togglePassword(id, iconId) {
-            const pwd = document.getElementById(id);
-            const icon = document.getElementById(iconId);
-            pwd.type = pwd.type === "password" ? "text" : "password";
-            icon.style.fillOpacity = pwd.type === "password" ? "1" : "0.4";
-        }
-
-        function updateChecklist() {
-            const pwd = document.getElementById("password").value;
-            const checklist = document.getElementById("pwd-checklist");
-
-            const checks = {
-                length: pwd.length >= 8,
-                uppercase: /[A-Z]/.test(pwd),
-                lowercase: /[a-z]/.test(pwd),
-                digit: /[0-9]/.test(pwd),
-                special: /[^A-Za-z0-9]/.test(pwd),
-            };
-
-            document.getElementById("check-length").className = checks.length ? "done" : "";
-            document.getElementById("check-uppercase").className = checks.uppercase ? "done" : "";
-            document.getElementById("check-lowercase").className = checks.lowercase ? "done" : "";
-            document.getElementById("check-digit").className = checks.digit ? "done" : "";
-            document.getElementById("check-special").className = checks.special ? "done" : "";
-
-            checklist.style.display = (pwd && !Object.values(checks).every(Boolean)) ? "block" : "none";
-        }
-
         <?php if ($success): ?>
-        setTimeout(() => {
-            window.location.href = "/subpages/login.php";
-        }, 3000);
+            setTimeout(() => {
+                window.location.href = "/subpages/login.php";
+            }, 3000);
         <?php endif; ?>
     </script>
 </head>
+
 <body>
     <div class="login-container">
         <?php if ($success): ?>
@@ -136,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <?php if ($error): ?>
-                    <div class="error-bubble"><?= htmlspecialchars($error) ?></div>
+                    <div class="error-bubble reset"><?= htmlspecialchars($error) ?></div>
                 <?php endif; ?>
 
                 <div class="btn">
@@ -146,4 +101,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
     </div>
 </body>
+
 </html>

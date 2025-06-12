@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .form {
@@ -171,6 +172,16 @@
   display: none;
 }
 
+.error-bubble.verify {
+  top: 27%;
+  z-index: 100;
+}
+
+.error-bubble.forgot, .error-bubble.reset {
+  top: 40%;
+  /* display: <?= empty($message) ? 'none' : 'block' ?>; */
+}
+
 .password-checklist {
   top: 52%;
 }
@@ -198,4 +209,26 @@
   font-size: 1.2rem;
   opacity: 0.5;
   display: none;
+}
+
+.message-box {
+  position: absolute;
+  left: 105%;
+  top: 27%;
+  background-color: #4caf50;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  width: 17rem;
+  line-height: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.success-bubble {
+  background-color: #7a9e7e;
+  padding: 1rem;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }

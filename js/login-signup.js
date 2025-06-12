@@ -172,3 +172,81 @@ function updatePasswordChecklist() {
     const allValid = Object.values(checks).every(Boolean);
     checklist.style.display = (pwd && !allValid) ? "block" : "none";
 }
+
+
+// verify-otp
+// TIMER CONTROL
+const urlParams = new URLSearchParams(window.location.search);
+const shouldStartTimer = urlParams.has('resend_started');
+
+if (shouldStartTimer) {
+    const btn = document.getElementById("resendbtn");
+    let countdown = 120;
+    btn.disabled = true;
+
+    const interval = setInterval(() => {
+        if (countdown > 0) {
+            btn.innerText = `Wait (${countdown}s)`;
+            countdown--;
+        } else {
+            btn.disabled = false;
+            btn.innerText = "Resend OTP";
+            clearInterval(interval);
+        }
+    }, 1000);
+}
+
+// AUTO-HIDE MESSAGE BUBBLE
+setTimeout(() => {
+    const bubble = document.querySelector('.error-bubble');
+    if (bubble) {
+        bubble.style.transition = 'opacity 0.5s ease';
+        bubble.style.opacity = '0';
+        setTimeout(() => bubble.remove(), 500);
+    }
+}, 4000);
+
+document.querySelector('input[name="otp"]').addEventListener('paste', function (e) {
+    e.preventDefault();
+    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+    const digits = pasted.replace(/\D/g, '').slice(0, 6);
+    this.value = digits;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const otpInput = document.querySelector('input[name="otp"]');
+    if (otpInput) otpInput.focus();
+});
+
+
+// reset
+
+function togglePassword(id, iconId) {
+    const pwd = document.getElementById(id);
+    const icon = document.getElementById(iconId);
+    pwd.type = pwd.type === "password" ? "text" : "password";
+    icon.style.fillOpacity = pwd.type === "password" ? "1" : "0.4";
+}
+
+function updateChecklist() {
+    const pwd = document.getElementById("password").value;
+    const checklist = document.getElementById("pwd-checklist");
+
+    const checks = {
+        length: pwd.length >= 8,
+        uppercase: /[A-Z]/.test(pwd),
+        lowercase: /[a-z]/.test(pwd),
+        digit: /[0-9]/.test(pwd),
+        special: /[^A-Za-z0-9]/.test(pwd),
+    };
+
+    document.getElementById("check-length").className = checks.length ? "done" : "";
+    document.getElementById("check-uppercase").className = checks.uppercase ? "done" : "";
+    document.getElementById("check-lowercase").className = checks.lowercase ? "done" : "";
+    document.getElementById("check-digit").className = checks.digit ? "done" : "";
+    document.getElementById("check-special").className = checks.special ? "done" : "";
+
+    checklist.style.display = (pwd && !Object.values(checks).every(Boolean)) ? "block" : "none";
+}
+
+  
