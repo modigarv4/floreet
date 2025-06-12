@@ -226,6 +226,11 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
+.message-box.verify {
+  transition: opacity 0.5s ease;
+}
+
+
 .success-bubble {
   background-color: #7a9e7e;
   padding: 1rem;

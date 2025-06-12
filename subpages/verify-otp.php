@@ -32,9 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
       $error = "No OTP found. Please resend.";
     } else {
       $currentTime = new DateTimeImmutable('now', new DateTimeZone('UTC'));
-      $expiresAt = (new DateTimeImmutable('now', new DateTimeZone('UTC')))
-        ->modify('+10 minutes')
-        ->format('Y-m-d H:i:s');
+      $expiryTime = new DateTimeImmutable($data['expires_at'], new DateTimeZone('UTC'));
 
 
 
@@ -111,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
             <?php if (!empty($error)): ?>
               <div class="error-bubble verify"><?= htmlspecialchars($error) ?></div>
             <?php elseif (!empty($message)): ?>
-              <div class="message-box"><?= htmlspecialchars($message) ?></div>
+              <div class="message-box verify"><?= htmlspecialchars($message) ?></div>
             <?php endif; ?>
         </div>
         <div class="btn verify">
@@ -123,7 +121,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
       <div class="resendf">
         <span class="resend-msg">Didn’t receive the OTP?</span>
         <form method="POST" action="/backend/send-otp.php?resend_started=1" novalidate>
-          <button type="submit" class="resend-btn" id="resendbtn">Resend OTP</button>
+          <button type="submit" class="resend-btn" id="resendbtn" disabled>Resend OTP</button>
+          <span id="countdown-otp"></span>
         </form>
       </div>
 

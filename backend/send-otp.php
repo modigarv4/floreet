@@ -25,27 +25,62 @@ if (isset($_SESSION['pending_signup']['email'])) {
 
 
 
-// ✅ Track resend attempts using session
-if (!isset($_SESSION['resend_attempts'])) {
-    $_SESSION['resend_attempts'] = [];
+// 🧠 Init Resend counter in session
+if (!isset($_SESSION['resend_attempt_log'])) {
+    $_SESSION['resend_attempt_log'] = [];
 }
-$_SESSION['resend_attempts'][$email] = ($_SESSION['resend_attempts'][$email] ?? 0) + 1;
 
-if ($_SESSION['resend_attempts'][$email] > 3) {
-    header("Location: {$redirect_page}?error=" . urlencode("Too many OTP requests. Try again after 10 minutes."));
+$emailLog = $_SESSION['resend_attempt_log'][$email] ?? [];
+$currentTimestamp = time();
+
+// 🧹 Keep only last 10 minutes of attempts
+$emailLog = array_filter($emailLog, fn($ts) => ($currentTimestamp - $ts) <= 600);
+$emailLog[] = $currentTimestamp;
+$_SESSION['resend_attempt_log'][$email] = $emailLog;
+
+if (count($emailLog) > 3) {
+    header("Location: {$redirect_page}?error=" . urlencode("Too many OTP requests. Please wait 10 minutes."));
     exit;
 }
 
-// ✅ Generate OTP and store expiry
+// ✅ Generate OTP
 $otp = strval(rand(100000, 999999));
 $expires_at = (new DateTime())->modify('+5 minutes')->format('Y-m-d H:i:s');
 $last_sent_at = (new DateTime())->format('Y-m-d H:i:s');
 
-
-// ✅ Save OTP in DB
-$stmt = $conn->prepare("REPLACE INTO otp_verifications (email, otp, expires_at, last_sent_at) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $email, $otp, $expires_at, $last_sent_at);
+// ✅ Fetch existing resend data
+$stmt = $conn->prepare("SELECT resend_count, last_resend FROM otp_verifications WHERE email = ?");
+$stmt->bind_param("s", $email);
 $stmt->execute();
+$result = $stmt->get_result();
+$data = $result->fetch_assoc();
+
+if ($data) {
+    $lastResend = new DateTimeImmutable($data['last_resend'], new DateTimeZone('UTC'));
+    $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
+    $diff = $now->getTimestamp() - $lastResend->getTimestamp(); // seconds
+
+    // ⛔ Server-side lockout if needed
+    if ($diff <= 600 && $data['resend_count'] >= 3) {
+        header("Location: {$redirect_page}?error=" . urlencode("Too many attempts. Try again after 10 minutes."));
+        exit;
+    }
+
+    $newCount = ($diff > 600) ? 1 : $data['resend_count'] + 1;
+
+    // ✅ Update existing OTP record
+    $update = $conn->prepare("UPDATE otp_verifications SET otp = ?, expires_at = ?, resend_count = ?, last_resend = ? WHERE email = ?");
+    $update->bind_param("ssiss", $otp, $expires_at, $newCount, $last_sent_at, $email);
+    $update->execute();
+} else {
+    // 🆕 Insert fresh OTP record
+    $resend_count = 1;
+    $insert = $conn->prepare("INSERT INTO otp_verifications (email, otp, expires_at, resend_count, last_resend) VALUES (?, ?, ?, ?, ?)");
+    $insert->bind_param("sssis", $email, $otp, $expires_at, $resend_count, $last_sent_at);
+    $insert->execute();
+}
+
+
 
 // ✅ Load SMTP config
 $smtp = require_once ROOT . '/config/smtp-config.php';
@@ -87,9 +122,13 @@ try {
     ";
     }
 
-    $mail->send();
+    try {
+        $mail->send();
+    } catch (Exception $e) {
+        error_log("Mailer Error: " . $mail->ErrorInfo);
+    }
 
-    $_SESSION['last_otp_sent_at'] = $last_sent_at;
+    $_SESSION['last_resend'] = $last_sent_at;
 
     header("Location: {$redirect_page}?message=" . urlencode("OTP sent successfully.") . "&resend_started=1");
     exit;

@@ -53,6 +53,44 @@ document.addEventListener('DOMContentLoaded', () => {
             checkAndToggleSubmit();
         });
     });
+
+    // VERIFY-OTP
+    const resendBtn = document.getElementById('resendbtn');
+    const countdownEl = document.getElementById('countdown-otp');
+
+    // Check if we're returning from a resend action
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('resend_started') === '1') {
+        startCountdown(90);
+    }
+
+    function startCountdown(seconds) {
+        resendBtn.disabled = true;
+        let remaining = seconds;
+
+        const interval = setInterval(() => {
+            if (remaining > 0) {
+                countdownEl.textContent = `(${remaining--}s)`;
+            } else {
+                clearInterval(interval);
+                countdownEl.textContent = '';
+                resendBtn.disabled = false;
+            }
+        }, 1000);
+    }
+
+    // Auto-dismiss "OTP sent" message bubble
+    setTimeout(() => {
+        const msg = document.querySelector('.message-box.verify');
+        if (msg) {
+            msg.style.transition = 'opacity 0.5s ease';
+            msg.style.opacity = '0';
+            setTimeout(() => msg.remove(), 500);
+        }
+    }, 2500);
+
+
+
 });
 
 
@@ -253,7 +291,7 @@ const shouldStartTimer = urlParams.has('resend_started');
 
 if (shouldStartTimer) {
     const btn = document.getElementById("resendbtn");
-    let countdown = 120;
+    let countdown = 90;
     btn.disabled = true;
 
     const interval = setInterval(() => {
@@ -277,6 +315,26 @@ setTimeout(() => {
         setTimeout(() => bubble.remove(), 500);
     }
 }, 4000);
+
+setTimeout(() => {
+    const msg = document.querySelector('.message-box.verify');
+    if (msg) {
+        msg.style.transition = 'opacity 0.5s ease';
+        msg.style.opacity = '0';
+        setTimeout(() => msg.remove(), 500);
+    }
+}, 2500);
+
+
+const errorText = new URLSearchParams(window.location.search).get('error');
+if (errorText && errorText.includes("Too many")) {
+    document.getElementById('resendbtn').disabled = true;
+    document.getElementById('countdown-otp').textContent = "Locked. Try later.";
+}
+
+
+
+
 
 document.querySelector('input[name="otp"]').addEventListener('paste', function (e) {
     e.preventDefault();
