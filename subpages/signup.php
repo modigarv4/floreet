@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+$emailExists = isset($_GET['error']) && $_GET['error'] === 'email_exists';
+?>
+
 
 <head>
-<?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
-    ?>  
+  <?php
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
+  ?>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <title>Floreet - Sign Up</title>
 
@@ -34,13 +38,18 @@
       </div>
 
       <div class="field" style="position: relative;">
-        <input name="email" id="email" placeholder="Email" class="input-field" type="text"
+        <input name="email" id="email" placeholder="Email" class="input-field" type="email"
           oninput="forceLowercase(this); hideAsterisk('email-asterisk'); hideErrorBubble('emailError'); this.classList.remove('error');"
           onblur="if(this.value.trim() === '') showAsterisk('email-asterisk'); else if(!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(this.value)) showErrorBubble('emailError');">
         <span class="asterisk" id="email-asterisk">*</span>
       </div>
 
       <div class="error-bubble email-error" id="emailError">Please enter a valid email address.</div>
+      <div id="emailExistsError" class="error-bubble" style="<?= $emailExists ? 'display: block;' : 'display: none;' ?>">
+        Email already exists
+      </div>
+
+
 
       <div class="field" style="position: relative;">
         <input name="password" id="password" placeholder="Password" class="input-field" type="password"
@@ -65,7 +74,7 @@
       </div>
 
       <div class="btn">
-        <button type="submit" id="signupBtn" class="button1">
+        <button type="submit" id="signupBtn" class="button1" disabled>
           <span class="btn-text">Sign Up</span>
           <span class="dots-container" style="display: none;">
             <div class="dot"></div>

@@ -177,7 +177,8 @@
   z-index: 100;
 }
 
-.error-bubble.forgot, .error-bubble.reset {
+.error-bubble.forgot,
+.error-bubble.reset {
   top: 40%;
   /* display: <?= empty($message) ? 'none' : 'block' ?>; */
 }
@@ -231,4 +232,9 @@
   color: white;
   border-radius: 10px;
   margin-bottom: 1rem;
+}
+
+#signupBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

@@ -40,7 +40,7 @@ $stmt->bind_param("s", $email);
 $stmt->execute();
 $stmt->store_result();
 if ($stmt->num_rows > 0) {
-  header("Location: ../subpages/signup.php?error=" . urlencode("Email already exists"));
+  header("Location: /subpages/signup.php?error=email_exists");
   exit;
 }
 $stmt->close();

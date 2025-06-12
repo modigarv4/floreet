@@ -1,3 +1,63 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    const otpInput = document.querySelector('input[name="otp"]');
+    if (otpInput) otpInput.focus();
+
+
+
+    const signupBtn = document.getElementById("signupBtn");
+    const fname = document.getElementById("first_name");
+    const lname = document.getElementById("last_name");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+
+    const checklist = {
+        length: false,
+        upper: false,
+        lower: false,
+        digit: false,
+        special: false
+    };
+
+    function validatePasswordChecklist(pwd) {
+        checklist.length = pwd.length >= 8;
+        checklist.upper = /[A-Z]/.test(pwd);
+        checklist.lower = /[a-z]/.test(pwd);
+        checklist.digit = /\d/.test(pwd);
+        checklist.special = /[^A-Za-z0-9]/.test(pwd);
+
+        document.getElementById("check-length").classList.toggle("done", checklist.length);
+        document.getElementById("check-uppercase").classList.toggle("done", checklist.upper);
+        document.getElementById("check-lowercase").classList.toggle("done", checklist.lower);
+        document.getElementById("check-digit").classList.toggle("done", checklist.digit);
+        document.getElementById("check-special").classList.toggle("done", checklist.special);
+    }
+
+    function isFormValid() {
+        const isFname = fname.value.trim() !== "";
+        const isLname = lname.value.trim() !== "";
+        const isEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email.value.trim());
+        const isPasswordValid = Object.values(checklist).every(val => val === true);
+        return isFname && isLname && isEmail && isPasswordValid;
+    }
+
+    function checkAndToggleSubmit() {
+        signupBtn.disabled = !isFormValid();
+    }
+
+    [fname, lname, email, password].forEach(field => {
+        field.addEventListener('input', () => {
+            if (field === password) {
+                validatePasswordChecklist(field.value);
+            }
+            checkAndToggleSubmit();
+        });
+    });
+});
+
+
+
+
 // login
 const loginForm = document.querySelector(".form");
 const loginBtn = document.getElementById("loginBtn");
@@ -21,6 +81,14 @@ function togglePassword() {
         icon.style.fillOpacity = "1"; // normal opacity
     }
 }
+
+// function togglePasswordreset(id, iconId) {
+//     const pwd = document.getElementById(id);
+//     const icon = document.getElementById(iconId);
+//     pwd.type = pwd.type === "password" ? "text" : "password";
+//     icon.style.fillOpacity = pwd.type === "password" ? "1" : "0.4";
+// }
+
 
 function validateForm() {
     const email = document.getElementById("email").value.trim();
@@ -69,12 +137,7 @@ document.querySelector('.form').addEventListener('submit', function (e) {
     dots.style.display = 'flex';
 });
 
-function togglePassword() {
-    const pwd = document.getElementById("password");
-    const icon = document.getElementById("eyeIcon");
-    pwd.type = pwd.type === "password" ? "text" : "password";
-    icon.style.fillOpacity = pwd.type === "password" ? "1" : "0.4";
-}
+
 
 function forceLowercase(el) {
     el.value = el.value.toLowerCase();
@@ -106,6 +169,8 @@ function validateSequential(e) {
     const lname = document.getElementById("last_name");
     const email = document.getElementById("email");
     const password = document.getElementById("password");
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
 
     const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     const pwdPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
@@ -137,6 +202,13 @@ function validateSequential(e) {
         showErrorBubble("emailError");
         hasError = true;
     }
+
+
+    // for email exist
+    if (error === "email_exists") {
+        showErrorBubble("emailExistsError");
+    }
+
 
     if (!pwdPattern.test(password.value)) {
         showErrorBubble("passwordError");
@@ -198,7 +270,7 @@ if (shouldStartTimer) {
 
 // AUTO-HIDE MESSAGE BUBBLE
 setTimeout(() => {
-    const bubble = document.querySelector('.error-bubble');
+    const bubble = document.querySelector('.error-bubble.verify');
     if (bubble) {
         bubble.style.transition = 'opacity 0.5s ease';
         bubble.style.opacity = '0';
@@ -213,20 +285,9 @@ document.querySelector('input[name="otp"]').addEventListener('paste', function (
     this.value = digits;
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const otpInput = document.querySelector('input[name="otp"]');
-    if (otpInput) otpInput.focus();
-});
-
 
 // reset
 
-function togglePassword(id, iconId) {
-    const pwd = document.getElementById(id);
-    const icon = document.getElementById(iconId);
-    pwd.type = pwd.type === "password" ? "text" : "password";
-    icon.style.fillOpacity = pwd.type === "password" ? "1" : "0.4";
-}
 
 function updateChecklist() {
     const pwd = document.getElementById("password").value;
@@ -249,4 +310,3 @@ function updateChecklist() {
     checklist.style.display = (pwd && !Object.values(checks).every(Boolean)) ? "block" : "none";
 }
 
-  

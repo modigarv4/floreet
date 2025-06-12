@@ -48,30 +48,6 @@
 }
 
 
-/* message bubble */
-.message-bubble {
-  margin: 1rem auto;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  width: fit-content;
-  max-width: 90%;
-  font-size: 0.95rem;
-  font-weight: 500;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.message-bubble.error {
-  background-color: #fcebea;
-  color: #cc1f1a;
-  border: 1px solid #f5c6cb;
-}
-
-.message-bubble.success {
-  background-color: #e6ffed;
-  color: #2e7d32;
-  border: 1px solid #c3e6cb;
-}
-
 /* code for the list of venders */
 .vlist{
   height: 4rem;  
