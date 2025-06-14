@@ -1,4 +1,14 @@
 <?php
+session_start();
+// Force browser not to cache this page
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
+
+if (isset($_SESSION['first_name'])) {
+  header("Location: /index.php");
+  exit();
+}
 require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
 ?>
 
@@ -85,6 +95,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
 
 
 <body>
+  <script>
+    window.addEventListener('pageshow', function(event) {
+      // For Safari and Firefox (bfcache), and Chrome/Edge (navigation type)
+      const navType = performance.getEntriesByType("navigation")[0]?.type;
+      if (event.persisted || navType === "back_forward") {
+        window.location.reload();
+      }
+    });
+  </script>
   <div class="login-container">
     <div class="form">
       <span class="back-arrow" onclick="window.location.href='/subpages/signup.php'">&#8592;</span>

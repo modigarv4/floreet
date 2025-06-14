@@ -21,17 +21,17 @@ $email = strtolower(trim($_POST["email"]));
 $password = $_POST["password"];
 
 if (empty($first_name) || empty($last_name) || empty($email) || empty($password)) {
-  header("Location: ../subpages/signup.php?error=" . urlencode("Please fill all fields"));
+  header("Location: /subpages/signup.php?error=" . urlencode("Please fill all fields"));
   exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  header("Location: ../subpages/signup.php?error=" . urlencode("Invalid email format"));
+  header("Location: /subpages/signup.php?error=" . urlencode("Invalid email format"));
   exit;
 }
 
 if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/", $password)) {
-  header("Location: ../subpages/signup.php?error=" . urlencode("Password does not meet security requirements"));
+  header("Location: /subpages/signup.php?error=pwd_format ");
   exit;
 }
 
@@ -54,5 +54,5 @@ $_SESSION['pending_signup'] = [
   'otp_time' => time()
 ];
 
-header("Location: send-otp.php");
+header("Location: /backend/send-otp.php");
 exit;

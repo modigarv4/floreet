@@ -47,6 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $stmt->close();
 } else {
-    header("Location: /subpages/login.php?error=Invalid request.");
+    header("Location: /subpages/login.php?error=invalidrequest");
     exit();
 }

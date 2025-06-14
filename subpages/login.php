@@ -1,3 +1,16 @@
+<?php
+session_start();
+// Force browser not to cache this page
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
+
+if (isset($_SESSION['first_name'])) {
+    header("Location: /index.php");
+    exit();
+}
+?>
+<?php $invalidrequest = isset($_GET['error']) && $_GET['error'] === 'invalidrequest'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,12 +19,19 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/include/head.php';
     ?>
     <title>Floreet - Login</title>
-
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-
 </head>
 
 <body>
+    <script>
+        window.addEventListener('pageshow', function(event) {
+            // For Safari and Firefox (bfcache), and Chrome/Edge (navigation type)
+            const navType = performance.getEntriesByType("navigation")[0]?.type;
+            if (event.persisted || navType === "back_forward") {
+                window.location.reload();
+            }
+        });
+    </script>
+
     <div class="login-container">
         <form class="form" method="POST" action="/backend/login-f.php" autocomplete="on" onsubmit="return validateForm()">
             <a href="/index.php" class="close-btn" title="Close">&times;</a>
@@ -43,14 +63,18 @@
 
             <!-- SHOWS ERROR MESSAGE -->
             <?php if (isset($_GET['error'])): ?>
-                <p style="color: white; font-size: 0.9rem; margin: 0.2rem 0 0 0;">
+                <div class="error-bubble" style="top:30%">
                     <?php
                     if ($_GET['error'] === 'invalid') echo 'Invalid email or password.';
                     else if ($_GET['error'] === 'notfound') echo 'No user found with that email.';
-                    else echo 'Login error.';
+                    else echo 'Invalid Credentials.';
                     ?>
-                </p>
+                </div>
             <?php endif; ?>
+
+            <div id="invalidrequest" class="error-bubble" style="<?= $invalidrequest ? 'display: block;' : 'display: none;' ?>">
+                Invalid Request.
+            </div>
 
 
 

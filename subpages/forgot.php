@@ -2,6 +2,11 @@
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/backend/connect.php';
 
+if (isset($_SESSION['first_name'])) {
+    header('Location: /index.php'); // or your dashboard/homepage
+    exit();
+}
+
 $email = '';
 $step = 'email'; // Default step
 $message = '';
@@ -55,6 +60,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+    <script>
+        window.addEventListener('pageshow', function(event) {
+            // For Safari and Firefox (bfcache), and Chrome/Edge (navigation type)
+            const navType = performance.getEntriesByType("navigation")[0]?.type;
+            if (event.persisted || navType === "back_forward") {
+                window.location.reload();
+            }
+        });
+    </script>
     <div class="login-container">
         <form method="POST" class="form">
             <p id="heading">Reset Password</p>

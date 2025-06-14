@@ -169,7 +169,6 @@
   width: 17rem;
   line-height: 1.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  display: none;
 }
 
 .error-bubble.verify {
@@ -183,12 +182,15 @@
   /* display: <?= empty($message) ? 'none' : 'block' ?>; */
 }
 
-.password-checklist {
+.password-checklist,
+.error-bubble.pwd-error {
   top: 52%;
+  display: none;
 }
 
 .error-bubble.email-error {
   top: 32%;
+  display: none;
 }
 
 .done {
@@ -229,7 +231,6 @@
 .message-box.verify {
   transition: opacity 0.5s ease;
 }
-
 
 .success-bubble {
   background-color: #7a9e7e;

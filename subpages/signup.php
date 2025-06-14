@@ -1,9 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 $emailExists = isset($_GET['error']) && $_GET['error'] === 'email_exists';
+$pwdformaterror = isset($_GET['error']) && $_GET['error'] === 'pwd_format';
+
+session_start();
+if (isset($_SESSION['first_name'])) {
+  header('Location: /index.php'); // or your dashboard/homepage
+  exit();
+}
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <?php
@@ -15,6 +22,15 @@ $emailExists = isset($_GET['error']) && $_GET['error'] === 'email_exists';
 </head>
 
 <body>
+  <script>
+    window.addEventListener('pageshow', function(event) {
+      // For Safari and Firefox (bfcache), and Chrome/Edge (navigation type)
+      const navType = performance.getEntriesByType("navigation")[0]?.type;
+      if (event.persisted || navType === "back_forward") {
+        window.location.reload();
+      }
+    });
+  </script>
   <div class="login-container">
     <form class="form" method="POST" action="/backend/signup-f.php" onsubmit="validateSequential(event)">
       <a href="/index.php" class="close-btn" title="Close">&times;</a>
@@ -45,9 +61,10 @@ $emailExists = isset($_GET['error']) && $_GET['error'] === 'email_exists';
       </div>
 
       <div class="error-bubble email-error" id="emailError">Please enter a valid email address.</div>
-      <div id="emailExistsError" class="error-bubble" style="<?= $emailExists ? 'display: block;' : 'display: none;' ?>">
+      <div id="emailExistsError" class="error-bubble email-error" style="<?= $emailExists ? 'display: block;' : 'display: none;' ?>">
         Email already exists
       </div>
+
 
 
 
@@ -73,10 +90,16 @@ $emailExists = isset($_GET['error']) && $_GET['error'] === 'email_exists';
         <p id="check-special">One special character</p>
       </div>
 
+      <div id="pwdformaterror" class="error-bubble pwd-error" style="<?= $pwd_format ? 'display: block;' : 'display: none;' ?>">
+        Password does not meet security requirements
+
+      </div>
+
+
       <div class="btn">
         <button type="submit" id="signupBtn" class="button1" disabled>
-          <span class="btn-text">Sign Up</span>
-          <span class="dots-container" style="display: none;">
+          <span class="btn-text" id="signupText">Sign Up</span>
+          <span class="dots-container" id="signupLoader" style="display: none;">
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>

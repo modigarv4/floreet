@@ -1,8 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // so on reload the errors are gone.
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has('error')) {
+        params.delete('error');
+        const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+        window.history.replaceState({}, document.title, newUrl);
+    }
+
+    // use either one of this ^
+
+    // if u want the refresh error gone for selected pages only
+    // const currentPage = window.location.pathname;
+
+    // if (
+    //     currentPage.includes('/subpages/login.php') ||
+    //     currentPage.includes('/subpages/signup.php')
+    // ) {
+    //     const params = new URLSearchParams(window.location.search);
+    //     if (params.has('error')) {
+    //         params.delete('error');
+    //         const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+    //         window.history.replaceState({}, document.title, newUrl);
+    //     }
+    // }
+
 
     const otpInput = document.querySelector('input[name="otp"]');
     if (otpInput) otpInput.focus();
-
 
 
     const signupBtn = document.getElementById("signupBtn");
@@ -88,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => msg.remove(), 500);
         }
     }, 2500);
-
 
 
 });

@@ -3,6 +3,12 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/backend/connect.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/backend/send-otp.php'; // optional helper for generateOTP()
 
+if (isset($_SESSION['first_name'])) {
+    header('Location: /index.php'); // or your dashboard/homepage
+    exit();
+}
+
+
 if (!isset($_SESSION['reset_email'])) {
     header("Location: /include/forgot.php");
     exit();
