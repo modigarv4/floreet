@@ -19,7 +19,7 @@ if (isset($_SESSION['pending_signup']['email'])) {
     $redirect_page = '/subpages/forgot.php'; // Correct for forgot
 } else {
     $from = $_SERVER['HTTP_REFERER'] ?? $redirect_page;
-    header("Location: {$from}?error=" . urlencode("Session expired. Please enter your email again."));
+    header("Location: {$from}?error=sessionexpired");
     exit;
 }
 
@@ -38,14 +38,16 @@ $emailLog = array_filter($emailLog, fn($ts) => ($currentTimestamp - $ts) <= 600)
 $emailLog[] = $currentTimestamp;
 $_SESSION['resend_attempt_log'][$email] = $emailLog;
 
-if (count($emailLog) > 3) {
-    header("Location: {$redirect_page}?error=" . urlencode("Too many OTP requests. Please wait 10 minutes."));
+if (count($emailLog) >= 3) {
+    // lockout logic
+    header("Location: {$redirect_page}?error=toomanyattempts");
     exit;
 }
 
+
 // ✅ Generate OTP
 $otp = strval(rand(100000, 999999));
-$expires_at = (new DateTime())->modify('+5 minutes')->format('Y-m-d H:i:s');
+$expires_at = (new DateTime())->modify('+1 minute')->format('Y-m-d H:i:s');
 $last_sent_at = (new DateTime())->format('Y-m-d H:i:s');
 
 // ✅ Fetch existing resend data
@@ -62,7 +64,7 @@ if ($data) {
 
     // ⛔ Server-side lockout if needed
     if ($diff <= 600 && $data['resend_count'] >= 3) {
-        header("Location: {$redirect_page}?error=" . urlencode("Too many attempts. Try again after 10 minutes."));
+        header("Location: {$redirect_page}?error=toomanyattempts");
         exit;
     }
 
@@ -130,9 +132,10 @@ try {
 
     $_SESSION['last_resend'] = $last_sent_at;
 
-    header("Location: {$redirect_page}?message=" . urlencode("OTP sent successfully.") . "&resend_started=1");
+
+    header("Location: {$redirect_page}?message=otpsuccess");
     exit;
 } catch (Exception $e) {
-    header("Location: {$redirect_page}?error=" . urlencode("Failed to send OTP. " . $mail->ErrorInfo));
+    header("Location: {$redirect_page}?error=failed");
     exit;
 }

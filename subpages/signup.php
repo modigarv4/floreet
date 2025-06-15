@@ -7,6 +7,16 @@ if (isset($_SESSION['first_name'])) {
   header('Location: /index.php'); // or your dashboard/homepage
   exit();
 }
+define('ROOT', dirname(__DIR__));
+
+$retainValues = $emailExists && isset($_SESSION['signup_data']);
+$firstNameValue = $retainValues ? htmlspecialchars($_SESSION['signup_data']['first_name']) : '';
+$lastNameValue = $retainValues ? htmlspecialchars($_SESSION['signup_data']['last_name']) : '';
+$emailValue = $retainValues ? htmlspecialchars($_SESSION['signup_data']['email']) : '';
+
+// Clear after use
+if ($retainValues) unset($_SESSION['signup_data']);
+
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +50,7 @@ if (isset($_SESSION['first_name'])) {
       <div style="display: flex; gap: 1rem;">
         <div class="field" style="width: 50%; position: relative;">
           <input id="first_name" name="first_name" placeholder="First Name" class="input-field" type="text"
+            value="<?= $firstNameValue ?>"
             oninput="formatName(this); hideAsterisk('fn-asterisk'); this.classList.remove('error');"
             onblur="if(this.value.trim() === '') showAsterisk('fn-asterisk');">
           <span class="asterisk" id="fn-asterisk">*</span>
@@ -47,6 +58,7 @@ if (isset($_SESSION['first_name'])) {
 
         <div class="field" style="width: 50%; position: relative;">
           <input id="last_name" name="last_name" placeholder="Last Name" class="input-field" type="text"
+            value="<?= $lastNameValue ?>"
             oninput="formatName(this); hideAsterisk('ln-asterisk'); this.classList.remove('error');"
             onblur="if(this.value.trim() === '') showAsterisk('ln-asterisk');">
           <span class="asterisk" id="ln-asterisk">*</span>
@@ -55,8 +67,10 @@ if (isset($_SESSION['first_name'])) {
 
       <div class="field" style="position: relative;">
         <input name="email" id="email" placeholder="Email" class="input-field" type="email"
+          value="<?= $emailValue ?>"
           oninput="forceLowercase(this); hideAsterisk('email-asterisk'); hideErrorBubble('emailError'); this.classList.remove('error');"
           onblur="if(this.value.trim() === '') showAsterisk('email-asterisk'); else if(!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(this.value)) showErrorBubble('emailError');">
+
         <span class="asterisk" id="email-asterisk">*</span>
       </div>
 

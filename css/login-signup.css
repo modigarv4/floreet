@@ -85,6 +85,11 @@
 .email {
   margin-top: 1rem;
 }
+.otp-email {
+  font-size: 0.9rem;
+  color: whitesmoke;
+  margin-bottom: 0.5rem;
+}
 .toggle-eye {
   display: flex;
   align-items: center;
@@ -155,6 +160,11 @@
 .resend-btn:hover {
   background-color: black;
 }
+.resend-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
 
 /* SIGNUP */
 .error-bubble,
@@ -173,6 +183,11 @@
 
 .error-bubble.verify {
   top: 27%;
+  z-index: 100;
+}
+
+.error-bubble.otp{
+  top: 50%;
   z-index: 100;
 }
 
@@ -232,13 +247,13 @@
   transition: opacity 0.5s ease;
 }
 
-.success-bubble {
-  background-color: #7a9e7e;
+/* .success-bubble {
+  background-color: #4caf50;
   padding: 1rem;
   color: white;
   border-radius: 10px;
   margin-bottom: 1rem;
-}
+} */
 
 #signupBtn:disabled {
   opacity: 0.6;

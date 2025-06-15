@@ -79,40 +79,55 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // VERIFY-OTP
-    const resendBtn = document.getElementById('resendbtn');
-    const countdownEl = document.getElementById('countdown-otp');
 
-    // Check if we're returning from a resend action
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('resend_started') === '1') {
-        startCountdown(90);
+    // Wait for OTP success message to be visible before hiding
+    const otpSuccessBubble = document.getElementById('otp-success');
+    if (otpSuccessBubble) {
+        setTimeout(() => {
+            otpSuccessBubble.style.transition = 'opacity 0.5s ease';
+            otpSuccessBubble.style.opacity = '0';
+            setTimeout(() => {
+                otpSuccessBubble.remove();
+            }, 500);
+        }, 5000); // 20 seconds
     }
 
-    function startCountdown(seconds) {
-        resendBtn.disabled = true;
-        let remaining = seconds;
 
-        const interval = setInterval(() => {
-            if (remaining > 0) {
-                countdownEl.textContent = `(${remaining--}s)`;
-            } else {
-                clearInterval(interval);
-                countdownEl.textContent = '';
-                resendBtn.disabled = false;
-            }
-        }, 1000);
-    }
 
-    // Auto-dismiss "OTP sent" message bubble
-    setTimeout(() => {
-        const msg = document.querySelector('.message-box.verify');
-        if (msg) {
-            msg.style.transition = 'opacity 0.5s ease';
-            msg.style.opacity = '0';
-            setTimeout(() => msg.remove(), 500);
+    window.addEventListener('pageshow', function (event) {
+        // For Safari and Firefox (bfcache), and Chrome/Edge (navigation type)
+        const navType = performance.getEntriesByType("navigation")[0]?.type;
+        if (event.persisted || navType === "back_forward") {
+            window.location.reload();
         }
-    }, 2500);
+    });
+
+    const minsSpan = document.getElementById('lockout-mins');
+    const secsSpan = document.getElementById('lockout-secs');
+
+    if (minsSpan && secsSpan) {
+        let totalSeconds = parseInt(minsSpan.textContent) * 60 + parseInt(secsSpan.textContent);
+
+        const updateTimer = () => {
+            totalSeconds--;
+            if (totalSeconds <= 0) {
+                clearInterval(timerInterval);
+                location.reload(); // try again after timer
+                return;
+            }
+
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = totalSeconds % 60;
+            minsSpan.textContent = mins.toString().padStart(2, '0');
+            secsSpan.textContent = secs.toString().padStart(2, '0');
+        };
+
+        const timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    if (!resendBtn || !resendTimer) {
+        console.warn("Resend elements not found");
+    }
 
 
 });
@@ -309,45 +324,7 @@ function updatePasswordChecklist() {
 
 
 // verify-otp
-// TIMER CONTROL
-const urlParams = new URLSearchParams(window.location.search);
-const shouldStartTimer = urlParams.has('resend_started');
-
-if (shouldStartTimer) {
-    const btn = document.getElementById("resendbtn");
-    let countdown = 90;
-    btn.disabled = true;
-
-    const interval = setInterval(() => {
-        if (countdown > 0) {
-            btn.innerText = `Wait (${countdown}s)`;
-            countdown--;
-        } else {
-            btn.disabled = false;
-            btn.innerText = "Resend OTP";
-            clearInterval(interval);
-        }
-    }, 1000);
-}
-
 // AUTO-HIDE MESSAGE BUBBLE
-setTimeout(() => {
-    const bubble = document.querySelector('.error-bubble.verify');
-    if (bubble) {
-        bubble.style.transition = 'opacity 0.5s ease';
-        bubble.style.opacity = '0';
-        setTimeout(() => bubble.remove(), 500);
-    }
-}, 4000);
-
-setTimeout(() => {
-    const msg = document.querySelector('.message-box.verify');
-    if (msg) {
-        msg.style.transition = 'opacity 0.5s ease';
-        msg.style.opacity = '0';
-        setTimeout(() => msg.remove(), 500);
-    }
-}, 2500);
 
 
 const errorText = new URLSearchParams(window.location.search).get('error');
@@ -355,8 +332,6 @@ if (errorText && errorText.includes("Too many")) {
     document.getElementById('resendbtn').disabled = true;
     document.getElementById('countdown-otp').textContent = "Locked. Try later.";
 }
-
-
 
 
 
@@ -369,7 +344,6 @@ document.querySelector('input[name="otp"]').addEventListener('paste', function (
 
 
 // reset
-
 
 function updateChecklist() {
     const pwd = document.getElementById("password").value;

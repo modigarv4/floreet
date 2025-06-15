@@ -39,10 +39,18 @@ $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $stmt->store_result();
+
+$_SESSION['signup_data'] = [
+  'first_name' => $first_name,
+  'last_name' => $last_name,
+  'email' => $email
+];
+
 if ($stmt->num_rows > 0) {
   header("Location: /subpages/signup.php?error=email_exists");
-  exit;
+  exit();
 }
+
 $stmt->close();
 
 $_SESSION['pending_signup'] = [
