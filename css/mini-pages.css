@@ -84,8 +84,51 @@
   background-color: #758063;
   border-radius: 20px;
 }
+.error-bubble.contact-email {
+  left: auto;
+  right: 105%;
+  top: 0%;
+  display: none;
+  z-index: 100;
+}
 
-ul.example-2 {
+.error-bubble.contact-email::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent #7a9e7e;
+}
+
+.contact-form {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 2rem;
+}
+.contact-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #93a484;
+  padding: 0.8rem;
+  border-radius: 10px;
+  color: white;
+  position: relative;
+}
+
+textarea.input-field {
+  resize: none;
+}
+
+ul.socials {
   display: flex;
   gap: 16px;
   margin-top: 2rem;
@@ -93,7 +136,7 @@ ul.example-2 {
   padding: 0;
 }
 
-.example-2 .icon-content {
+.socials .icon-content {
   position: relative;
   width: 48px;
   height: 48px;
@@ -103,11 +146,17 @@ ul.example-2 {
   transition: transform 0.3s ease;
 }
 
-.example-2 .icon-content:hover {
+.icon-content:focus-visible {
+  outline: 2px solid #b3b0a4; /* --nomad */
+  outline-offset: 4px;
+  transform: scale(1.1); /* mimic hover */
+}
+
+.socials .icon-content:hover {
   transform: scale(1.1);
 }
 
-.example-2 .icon-content a {
+.socials .icon-content a {
   display: block;
   width: 100%;
   height: 100%;
@@ -115,8 +164,23 @@ ul.example-2 {
   text-decoration: none;
   color: inherit;
 }
+.icon-content:hover .filled,
+.icon-content:focus-visible .filled {
+  transform: scaleY(1);
+}
 
-.example-2 .icon-content svg {
+.icon-content:focus-visible {
+  outline: 2px solid #b3b0a4;
+  transform: scale(1.1);
+}
+
+.icon-content.focused {
+  outline: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.socials .icon-content svg {
   width: 24px;
   height: 24px;
   color: whitesmoke;
@@ -129,7 +193,7 @@ ul.example-2 {
 }
 
 /* Filled background effect */
-.example-2 .filled {
+.socials .filled {
   position: absolute;
   top: 0;
   left: 0;
@@ -142,12 +206,17 @@ ul.example-2 {
   z-index: 1;
 }
 
-.example-2 .icon-content:hover .filled {
+.socials .icon-content:hover .filled {
   transform: scaleY(1);
+}
+.social-link.focused .filled {
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: 2px solid #fff;
+  border-radius: 50%;
 }
 
 /* Tooltip */
-.example-2 .tooltip {
+.socials .tooltip {
   position: absolute;
   bottom: -28px;
   left: 50%;
@@ -163,7 +232,20 @@ ul.example-2 {
   transition: opacity 0.2s ease, bottom 0.2s ease;
 }
 
-.example-2 .icon-content:hover .tooltip {
+.socials .icon-content:hover .tooltip {
   opacity: 1;
   bottom: -36px;
+}
+
+.fade-message {
+  margin-top: 10px;
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1rem;
+  transition: opacity 0.5s ease-in-out;
+}
+.fade-message.hide {
+  opacity: 0;
+  visibility: hidden;
 }

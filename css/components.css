@@ -1,4 +1,3 @@
-
 /* loading dots */
 .dots-container {
   display: flex;
@@ -47,10 +46,9 @@
   }
 }
 
-
 /* code for the list of venders */
-.vlist{
-  height: 4rem;  
+.vlist {
+  height: 4rem;
   width: 100%;
   border-radius: 12px;
   background-color: maroon;
@@ -71,7 +69,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
- 
+
   /* color: #fff;
   text-align: center;
   width: 100%;
@@ -86,4 +84,53 @@
    margin: 1rem 0;
   font-size: 1.1rem; 
 } */
- 
+
+/* starts */
+.rating {
+  display: flex;
+  flex-direction: row; /* Left-to-right alignment */
+  direction:ltr; /* Makes visual flow left to right */
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.5s ease;
+}
+
+.rating label .svgOne {
+  stroke: #ccc;
+  fill: transparent;
+  transition: stroke 0.5s ease, fill 0.5s ease;
+}
+
+.rating label .svgTwo {
+  position: absolute;
+  top: -1px;
+  fill: gold;
+  stroke: transparent;
+  opacity: 0;
+  transition: stroke 0.5s ease, fill 0.5s ease, opacity 0.5s ease;
+}
+
+@keyframes displayStar {
+  0% {
+    transform: rotateX(100deg) rotateY(100deg) translateY(10px);
+  }
+  100% {
+    transform: rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+}

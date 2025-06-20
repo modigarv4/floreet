@@ -13,6 +13,11 @@ window.addEventListener('pageshow', (event) => {
         resetPageUI('email', 'password', 'loginText', 'loginLoader');
     }
 
+    // -------- contact form --------
+     if (path.includes('/subpages/contact.php')) {
+        resetPageUI('name', 'contact-email', 'subject', 'message', 'rating');
+    }
+
     // -------- Signup Page Reset --------
     else if (path.includes('/subpages/signup.php')) {
         resetPageUI('first_name', 'email', 'signupText', 'signupLoader');
