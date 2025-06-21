@@ -104,7 +104,7 @@ $firstName = isset($_SESSION['first_name']) ? $_SESSION['first_name'] : 'Guest';
         </button>
         <div class="custom-dropdown" id="dropdownMenu">
           <a href="#">Shop by Color</a>
-          <a href="/include/contact.php">Contact</a>
+          <a href="/subpages/contact.php">Contact</a>
         </div>
       </div>
 

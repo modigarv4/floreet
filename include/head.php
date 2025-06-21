@@ -21,10 +21,11 @@ require_once __DIR__ . '/../config.php'; // Pull in ROOT from project root
 <script src="/js/login-signup.js" defer></script>
 <script src="/js/loading-dots.js" defer></script>
 <script src="/js/pageshow.js" defer></script>
-<script src="/js/component.js" defer></script
+<script src="/js/component.js" defer></script>
 
 
 
 <!-- fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Georgia&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">

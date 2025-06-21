@@ -6,7 +6,7 @@
   height: 100%;
   width: 20%;
 }
-.featured {
+.f-care {
   height: 100%;
   width: 45%;
 }
@@ -22,7 +22,7 @@
 
 .other-products,
 .about-section,
-.featured,
+.f-care,
 .idk,
 .premade {
   margin-top: 1rem;
@@ -72,8 +72,6 @@
   font-size: 0.75rem;
 }
 
-
-
 @media (max-width: 768px) {
   .about-content {
     padding: 1.5rem;
@@ -83,4 +81,145 @@
   .about-content h2 {
     font-size: 1.5rem;
   }
+}
+
+/* flower care */
+.flower-care-bg {
+  background: 
+    url("/assets/backgrounds/flower-care.jpeg") no-repeat center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Warm parchment-style overlay content */
+.flower-care-content {
+  border-radius: 16px;
+  height: 100%;
+  width: 100%;
+  padding: 1rem 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  font-family: "Georgia", serif;
+  box-sizing: border-box;
+  color: #3b3b2f;
+}
+
+/* Title + icon row */
+.flower-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+}
+
+.icon-book {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #3b3b2f;
+  flex-shrink: 0;
+}
+
+.flower-heading {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Subtext */
+.flower-subtext {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #4a5c4a;
+  margin-bottom: 1.5rem;
+}
+
+/* Button aligned bottom-right */
+.flower-btn-container {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.btn.green.small {
+  background-color: #4f8a63;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn.green.small:hover {
+  background-color: #6bad7f;
+}
+
+/* PREMADE */
+
+.premade-overlay {
+  background: url("/assets/backgrounds/premade.jpeg") no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.premade-content {
+  position: relative;
+  text-align: center;
+  color: #3e2f1c;
+  font-family: "Playfair Display", serif;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.premade-heading {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.premade-content .btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: #3e7050;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.45rem 1.3rem;
+  border-radius: 20px;
+  font-family: "Inter", sans-serif;
+  transition: background 0.3s ease;
+}
+
+.premade-content .btn:hover {
+  background-color: #4f8a65;
+}
+
+.premade-ribbon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #fff8f2; /* warmer creamy tone */
+  color: #7b3e2c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  font-family: "Inter", sans-serif;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e8cfc2;
 }

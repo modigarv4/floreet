@@ -26,12 +26,15 @@
             </div>
             <div class="b-container">
                 <section class="s1 premade">
-                    <div class="s1-overlay">
-                        <div class="s1-content">
-                            <p>premade.</p>
+                    <div class="s1-overlay premade-overlay">
+                        <div class="s1-content premade-content">
+                            <span class="premade-ribbon">💐 Ready-to-Ship</span>
+                            <h2 class="premade-heading">Browse Our Signature Bouquets</h2>
+                            <a href="/subpages/premade.php" class="btn white small">View Collection</a>
                         </div>
                     </div>
                 </section>
+
                 <section class="s1 idk">
                     <div class="s1-overlay">
                         <div class="s1-content">
@@ -39,13 +42,23 @@
                         </div>
                     </div>
                 </section>
-                <section class="s1 featured">
-                    <div class="s1-overlay">
-                        <div class="s1-content">
-                            <p>flower care tips</p>
+                <section class="s1 f-care">
+                    <div class="s1-overlay flower-care-bg">
+                        <div class="s1-content flower-care-content">
+                            <div class="flower-title">
+                                <svg class="icon-book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M6 4.5A2.5 2.5 0 013.5 7v11A1.5 1.5 0 005 19.5h6v-15H6zM13 4.5v15h6a1.5 1.5 0 001.5-1.5V7a2.5 2.5 0 00-2.5-2.5h-5z" clip-rule="evenodd" />
+                                </svg>
+                                <h2 class="flower-heading">Make Your Flowers Last Longer 🌿</h2>
+                            </div>
+                            <p class="flower-subtext" style="padding-bottom: 1rem;">Discover simple care tips for fresh, lasting blooms.</p>
+                            <div class="flower-btn-container">
+                                <a href="/subpages/flower-care.php" class="btn green small">Learn Flower Care</a>
+                            </div>
                         </div>
                     </div>
                 </section>
+
             </div>
         </div>
 
@@ -72,7 +85,7 @@
                             At Floreet, every bloom tells a story. We create thoughtfully designed floral pieces that help you express what words often can’t.
                         </p>
                         <p style="font-family: 'Dancing Script', cursive; font-size: 1.2rem;">— The Floreet Team</p>
-                         <a href="/subpages/contact.php" class="why-link">Why Floreet →</a>
+                        <a href="/subpages/contact.php" class="why-link">Why Floreet →</a>
                     </div>
                 </div>
             </section>
