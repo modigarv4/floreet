@@ -247,7 +247,7 @@ $firstName = isset($_SESSION['first_name']) ? $_SESSION['first_name'] : 'Guest';
     margin-top: 0.3rem;
     font-size: 1.2rem;
     color: white;
-    font-family: 'Great Vibes', cursive;
+    font-family: "Great Vibes", cursive;
     font-weight: 500;
     padding-right: 0.5rem;
   }

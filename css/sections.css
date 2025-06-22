@@ -2,7 +2,7 @@
   height: 100%;
   width: 35%;
 }
-.idk {
+.testimonial {
   height: 100%;
   width: 20%;
 }
@@ -23,7 +23,7 @@
 .other-products,
 .about-section,
 .f-care,
-.idk,
+.testimonial,
 .premade {
   margin-top: 1rem;
 }
@@ -85,8 +85,7 @@
 
 /* flower care */
 .flower-care-bg {
-  background: 
-    url("/assets/backgrounds/flower-care.jpeg") no-repeat center;
+  background: url("/assets/backgrounds/flower-care.jpeg") no-repeat center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -193,26 +192,14 @@
 }
 
 .premade-content .btn {
-  position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background-color: #3e7050;
-  color: white;
-  font-size: 0.75rem;
-  padding: 0.45rem 1.3rem;
-  border-radius: 20px;
-  font-family: "Inter", sans-serif;
   transition: background 0.3s ease;
 }
 
-.premade-content .btn:hover {
-  background-color: #4f8a65;
-}
-
+.premade-content .btn,
 .premade-ribbon {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
   background-color: #fff8f2; /* warmer creamy tone */
   color: #7b3e2c;
   font-size: 0.85rem;
@@ -222,4 +209,166 @@
   font-family: "Inter", sans-serif;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid #e8cfc2;
+}
+
+.premade-content .btn:hover {
+  background-color: #4f8a65;
+}
+
+.premade-ribbon {
+  top: 1rem;
+  left: 1rem;
+}
+
+/* testimonial */
+/* Testimonial Styles */
+
+/* Testimonial Section */
+
+.testimonial-overlay {
+  background: url("/assets/backgrounds/papers.jpeg") no-repeat center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.testimonial-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(2px); /* subtle blur */
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.testimonial-content {
+  position: relative;
+  padding: 1rem 1rem;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: "Georgia", serif;
+  color: #3b2d1f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  z-index: 1;
+}
+
+/* Mailbox Stamp */
+.testimonial-stamp {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.25rem;
+  background-color: #fff9f3;
+  padding: 0.4rem 0.65rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Stylized testimonial text */
+.testimonial-text {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 90%;
+  margin: 0;
+  color: #5a4332;
+}
+
+/* Button like premade/f-care */
+.testimonial-btn-container {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.btn.soft.small {
+  background-color: #c4928e;
+  color: white;
+  border-radius: 20px;
+  padding: 0.45rem 1.2rem;
+  font-size: 0.75rem;
+  font-family: "Inter", sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.btn.soft.small:hover {
+  background-color: #d8a9a2;
+}
+
+/* products */
+/* Background with collage & blur effect */
+.popular-overlay {
+  background: url("/assets/backgrounds/vase.jpeg") no-repeat center center;
+  background-size: cover;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.popular-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3); /* translucent light overlay */
+  backdrop-filter: blur(1.5px); /* soft blur */
+  z-index: 1;
+}
+
+/* Content */
+.popular-content {
+  position: relative;
+  z-index: 2;
+  color: #3e2f1c;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+/* Heading */
+.popular-heading {
+  font-size: 1.4rem;
+  margin: 0 0 1.2rem 0;
+  padding: 0;
+  left: 0;
+  text-align: center;
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+/* Button */
+.popular-content .btn.green.small {
+  background-color: #3e7050;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.5rem 1.3rem;
+  border-radius: 20px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.popular-content .btn.green.small:hover {
+  background-color: #4f8a65;
 }

@@ -35,13 +35,19 @@
                     </div>
                 </section>
 
-                <section class="s1 idk">
-                    <div class="s1-overlay">
-                        <div class="s1-content">
-                            <p>testimonials</p>
+                <section class="s1 testimonial">
+                    <div class="s1-overlay testimonial-overlay">
+                        <div class="s1-content testimonial-content">
+                            <span class="testimonial-stamp">📬</span>
+                            <p class="testimonial-text">They made my day truly special...</p>
+                            <div class="testimonial-btn-container">
+                                <a href="/subpages/testimonials.php" class="btn soft small">Read More Stories</a>
+                            </div>
                         </div>
                     </div>
                 </section>
+
+
                 <section class="s1 f-care">
                     <div class="s1-overlay flower-care-bg">
                         <div class="s1-content flower-care-content">
@@ -71,12 +77,14 @@
                 </div>
             </section>
             <section class="s1 other-products">
-                <div class="s1-overlay">
-                    <div class="s1-content">
-                        <p>popular products.</p>
+                <div class="s1-overlay popular-overlay">
+                    <div class="s1-content popular-content">
+                        <h2 class="popular-heading">What’s Blooming This Week?🌟</h2>
+                        <a href="/subpages/popular.php" class="btn green small">Shop Bestsellers</a>
                     </div>
                 </div>
             </section>
+
             <section class="s1 about-section">
                 <div class="s1-overlay about-overlay">
                     <div class="s1-content about-content">

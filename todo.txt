@@ -1,7 +1,6 @@
 > upade databse for the testimonial page, the vendor will provide their custom items to sell, the website has its custom items to sell, the feedback form, also the bouquets are by ocasion, as we have the shop by ocasion page,
 
 > verify if the correct otp opens the webpage, 
-> combine internal css of login, signup, forgot pwd pages, into a single css file
 > forgot pwd logic and working, 
 > frontend of index page
 
@@ -17,4 +16,7 @@ ob_end_flush - understand what it is
     cart
     order
     profile
+
+
+> header and footer visible in full screen mode
     
