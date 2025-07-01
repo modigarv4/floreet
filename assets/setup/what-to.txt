@@ -1,0 +1,2 @@
+1> Create a folder named "config" if it doesn't exist
+2> move the smtp-config file there.

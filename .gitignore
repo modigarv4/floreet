@@ -1,0 +1,49 @@
+# 👇 Sensitive Files (Always ignore real credentials)
+smtp-config.php
+password-app.txt
+.env
+
+# 👇 System & OS generated files
+.DS_Store
+Thumbs.db
+
+# 👇 IDE/editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+/config/
+
+
+# 👇 Logs and temporary files
+*.log
+*.bak
+*.tmp
+
+# 👇 PHP-specific
+composer.lock
+vendor/         # if you're using Composer
+
+# 👇 Node-related (in case you add JS build tools later)
+node_modules/
+dist/
+build/
+
+# 👇 Database export backups
+*.sql
+*.sql.gz
+*.sqlite
+
+# 👇 Custom file types you want to keep local
+*.key
+*.pem
+*.crt
+*.cache
+
+
+elements.txt
+explains.txt
+snippets.txt
+structure.txt    /config/ 
+/config/ 

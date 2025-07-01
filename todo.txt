@@ -1,0 +1,22 @@
+> upade databse for the testimonial page, the vendor will provide their custom items to sell, the website has its custom items to sell, the feedback form, also the bouquets are by ocasion, as we have the shop by ocasion page,
+
+> verify if the correct otp opens the webpage, 
+> forgot pwd logic and working, 
+> frontend of index page
+
+breakdown the all the codes and put out the common reusable components
+
+in signup page, a field was missing and i clicked singup and it refreshed the page, instead i want it to show an error bubble for the missing field
+
+ob_start() 
+ob_end_flush - understand what it is
+
+
+> pages
+    cart
+    order
+    profile
+
+
+> header and footer visible in full screen mode
+    
